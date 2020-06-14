@@ -1,35 +1,42 @@
 <html>
+	<head>
+	<title>To Objects</title>
 
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
-<title>CSV Parser</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js" type="text/javascript">
-</script>
-<style type="text/css">
-body { font-family:arial, helvetica, sans-serif; font-weight:normal; font-size:13px; color:#000; text-align:left; margin:3px 0px; }
-#wrap { width:500px; height:500px; margin:20px;  }
-</style>
-</head>
+	</head>
 
-<body>
+	<body>
+		<input id="run" type="button" value="Run" />
 
-<div id="wrap">
-</div>
-<!-- end wrap -->
-<script type="text/javascript">
- $.get('src/fish.csv', function(data) {
-	var build = '<table border="1" cellpadding="2" cellspacing="0" style="border-collapse: collapse" width="100%">\n';
-	var rows = data.split("\n");
-	rows.forEach( function getvalues(thisRow) {
-	build += "<tr>\n";
-	var columns = thisRow.split(",");
-	for(var i=0;i<columns.length;i++){ build += "<td>" + columns[i] + "</td>\n"; }   			
-	build += "</tr>\n";
-	})
-	build += "</table>";
-	$('#wrap').append(build);	
- });</script>
+		<textarea id="result" style="height: 500px;"></textarea>
+		
+		
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script src="src/jquery.csv.js"></script>
 
-</body>
+		<script id="fishcsv" src="src/fish.csv"></script>
 
+
+		<script>
+			// enable syntax highlighting
+			hljs.initHighlightingOnLoad();
+
+			$(document).ready(() => {
+				parse();
+			});
+			
+			
+
+			$('#run').bind('click', function () {
+				parse();
+			});
+
+			function parse() {
+				const input = $('#fishcsv').val();
+				const data = $.csv.toObjects(input);
+				$('#result').empty();
+				$('#result').html(JSON.stringify(data, null, 2));
+			}
+		</script>   
+	</body>
 </html>
