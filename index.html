@@ -21,13 +21,31 @@
 					dynamicTyping: true,
 					complete: function(results) {
 						data = results;
+						console.log(data);
 					}
 				});
 			}
 
 			$(document).ready(function(){
 				$("#csv-file").change(handleFileSelect);
+				
 			});
+			
+			function myFunction() {
+				var file = "fish.csv"
+				Papa.parse("fish.csv", {
+					header: true,
+					download: true,
+					dynamicTyping: true,
+					complete: function(results) {
+						data = results;
+						console.log(data);
+					}
+				});
+			}
+			
 		</script>
-<input type="file" id="csv-file" name="files"/>	</body>
+		<input type="file" id="csv-file" name="files"/>	
+		<button onclick="myFunction()">Click me</button>
+	</body>
 </html>
