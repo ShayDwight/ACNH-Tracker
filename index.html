@@ -13,20 +13,21 @@
 		<script>
 			var data;
 
-			function parseCSV() {
-				Papa.parse("src/fish.csv", {
+			function handleFileSelect(evt) {
+				var file = evt.target.files[0];
+
+				Papa.parse(file, {
 					header: true,
 					dynamicTyping: true,
 					complete: function(results) {
 						data = results;
-					
 					}
-				console.log(data);
-				});	
-				
+				});
 			}
-		
+
+			$(document).ready(function(){
+				$("#csv-file").change(handleFileSelect);
+			});
 		</script>
-		<button onclick="parseCSV()">Click me</button>
-	</body>
+<input type="file" id="csv-file" name="files"/>	</body>
 </html>
