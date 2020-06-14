@@ -5,38 +5,28 @@
 	</head>
 
 	<body>
-		<input id="run" type="button" value="Run" />
-
-		<textarea id="result" style="height: 500px;"></textarea>
-		
 		
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-		<script src="src/jquery.csv.js"></script>
-
-		<script id="fishcsv" src="src/fish.csv"></script>
-
+		<script src="js/jquery-csv-master/src/jquery.csv.js"></script>
+		<script src="src/papaparse.min.js"></script>
 
 		<script>
-			// enable syntax highlighting
-			hljs.initHighlightingOnLoad();
+			var data;
 
-			$(document).ready(() => {
-				parse();
-			});
-			
-			
-
-			$('#run').bind('click', function () {
-				parse();
-			});
-
-			function parse() {
-				const input = $('src/fish.csv').val();
-				const data = $.csv.toObjects(input);
-				$('#result').empty();
-				$('#result').html(JSON.stringify(data, null, 2));
+			function parseCSV() {
+				Papa.parse("src/fish.csv", {
+					header: true,
+					dynamicTyping: true,
+					complete: function(results) {
+						data = results;
+					
+					}
+				});	
+				console.log(data);
 			}
-		</script>   
+		
+		</script>
+		<button onclick="parseCSV()">Click me</button>
 	</body>
 </html>
