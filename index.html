@@ -32,7 +32,7 @@
 			});
 
 			function parse() {
-				const input = $('#fishcsv').val();
+				const input = $('src/fish.csv').val();
 				const data = $.csv.toObjects(input);
 				$('#result').empty();
 				$('#result').html(JSON.stringify(data, null, 2));
