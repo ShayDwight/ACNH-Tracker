@@ -66,8 +66,8 @@
 						},
 						{formatter:"responsiveCollapse", headerSort:true},
 						{title:"Name", field:"Name", width:"25%"},
-						{title:"Price", field:"Price", width:"15%"},
 						{title:"Location", field:"Location", width:"25%"},
+						{title:"Price", field:"Price", width:"15%"},
 						{title:"Time", field:"Time", width:"25%"},
 						{title:"Hours", field:"HoursN",},
 						{title:"Favourite Color", field:"col"},
@@ -102,6 +102,10 @@
 				} else { 
 					parseData("src/fish.csv", doStuff);
 				};
+				var x = document.cookie;
+				console.log(localStorage);
+				console.log("this is the last line");
+
 			});
 			
 			function removelocalStorage() {
@@ -109,7 +113,8 @@
 				var txt;
 				var r = confirm("Are you sure you want to clear your caught fish and bugs?");
 				if (r == true) {
-					localStorage.setItem("tabulator-data", "");
+						localStorage.clear();
+					//localStorage.setItem("tabulator-data", "");
 				}
 			}
 		</script>
