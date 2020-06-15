@@ -12,8 +12,8 @@
 		<script src="js/papaparse.min.js"></script>
 		<script src="js/jquery.sparkline.js"></script>
 		<div>
-			<button id="reactivity-changeGroup">Group By Location</button>
-			<button id="clearData" onclick="removeCookies()">Clear Data</button>
+			<button id="clearData" onclick="removelocalStorage()">Clear localStorage</button>
+			<button id="clearData" onclick="deleteAllCookies()">Delete Cookies</button>
 		</div>
 		<div id="fish-table"></div>
 		<script>
@@ -34,9 +34,8 @@
 					responsiveLayout:"collapse",
 					responsiveLayoutCollapseStartOpen:false,
 					index:"id",
-					groupBy:"Caught",
 					columns:[
-						{title:"Caught?", field:"Caught", cellClick:function(e, cell){
+						{title:"Caught?", field:"Caught", width:"10%", cellClick:function(e, cell){
 							var cellValue = cell.getValue();
 							if (cellValue == "Caught!") {
 								cell.setValue("Donated!");
@@ -66,9 +65,9 @@
 								}
 							}
 						},
-						{title:"Name", field:"Name", width:"25%"},
 						{formatter:"responsiveCollapse", headerSort:true},
-						{title:"Price", field:"Price"},
+						{title:"Name", field:"Name", width:"25%"},
+						{title:"Price", field:"Price", width:"15%"},
 						{title:"Location", field:"Location", width:"25%"},
 						{title:"Time", field:"Time", width:"25%"},
 						{title:"Hours", field:"HoursN",},
@@ -80,9 +79,6 @@
 						//JSON encode data and store in local storage.
 						localStorage.setItem("tabulator-data", JSON.stringify(data));
 					},
-				});
-				document.getElementById("reactivity-changeGroup").addEventListener("click", function(){
-				table.setGroupBy("Location")
 				});
 			}
 
@@ -109,12 +105,25 @@
 				};
 			});
 			
-			function removeCookies() {
+			function removelocalStorage() {
 				//localStorage.setItem("tabulator-data", "");
 				var txt;
 				var r = confirm("Are you sure you want to clear your caught fish and bugs?");
 				if (r == true) {
 					localStorage.setItem("tabulator-data", "");
+				}
+			}
+			function deleteAllCookies() {
+				var r = confirm("Are you sure you want to delete this site's cookie?");
+				if (r == true) {
+					var cookies = document.cookie.split(";");
+
+					for (var i = 0; i < cookies.length; i++) {
+						var cookie = cookies[i];
+						var eqPos = cookie.indexOf("=");
+						var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+						document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+					}
 				}
 			}
 		</script>
