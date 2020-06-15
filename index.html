@@ -1,6 +1,6 @@
 <html>
 	<head>
-	<title>Index2</title>
+	<title>YAACNHT - Yet Another AC:NH Tracker</title>
 
 	</head>
 
@@ -10,8 +10,10 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		<script src="src/papaparse.min.js"></script>
+		<script src="js/jquery.sparkline.js"></script>
 		<div>
 			<button id="reactivity-changeGroup">Group By Location</button>
+			<button id="clearData" onclick="removeCookies()">Clear Data</button>
 		</div>
 		<div id="fish-table"></div>
 		<script>
@@ -29,7 +31,9 @@
 					data:data,
 					reactiveData:true,
 					persistence:true,
-					index:"Name",
+					responsiveLayout:"collapse",
+					responsiveLayoutCollapseStartOpen:false,
+					index:"id",
 					groupBy:"Caught",
 					columns:[
 						{title:"Caught?", field:"Caught", cellClick:function(e, cell){
@@ -62,11 +66,12 @@
 								}
 							}
 						},
-						{title:"Name", field:"Name"},
+						{title:"Name", field:"Name", width:"25%"},
+						{formatter:"responsiveCollapse", headerSort:true},
 						{title:"Price", field:"Price"},
-						{title:"Location", field:"Location"},
-						{title:"Time", field:"Time"},
-						{title:"Hours",field:"Hour0", hozAlign:"center", formatter:"tickCross",  headerFilter:"tickCross",  headerFilterParams:{"tristate":true},headerFilterEmptyCheck:function(value){return value === null}},
+						{title:"Location", field:"Location", width:"25%"},
+						{title:"Time", field:"Time", width:"25%"},
+						{title:"Hours", field:"HoursN",},
 						{title:"Favourite Color", field:"col"},
 						{title:"Date Of Birth", field:"dob"},
 						{title:"Cheese Preference", field:"cheese"},
@@ -100,10 +105,18 @@
 				if(data){
 					doStuff(JSON.parse(data));
 				} else { 
-					parseData("src/fish.csv", doStuff);
+					parseData("src/fish2.csv", doStuff);
 				};
 			});
-
+			
+			function removeCookies() {
+				//localStorage.setItem("tabulator-data", "");
+				var txt;
+				var r = confirm("Are you sure you want to clear your caught fish and bugs?");
+				if (r == true) {
+					localStorage.setItem("tabulator-data", "");
+				}
+			}
 		</script>
 	</body>
 </html>
