@@ -1,51 +1,109 @@
 <html>
 	<head>
-	<title>To Objects</title>
+	<title>Index2</title>
 
 	</head>
 
 	<body>
-		
+		<link href="https://unpkg.com/tabulator-tables@4.6.3/dist/css/tabulator.min.css" rel="stylesheet">
+		<script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.6.3/dist/js/tabulator.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		<script src="src/papaparse.min.js"></script>
-
+		<div>
+			<button id="reactivity-changeGroup">Group By Location</button>
+		</div>
+		<div id="fish-table"></div>
 		<script>
-			var data;
+			function doStuff(data) {
+				//Name,Price,Location,Time,Hour0,Hour1,Hour2,Hour3,Hour4,Hour5,Hour6,Hour7,Hour8,Hour9,Hour10,Hour11,Hour12,Hour13,Hour14,Hour15,Hour16,Hour17,Hour18,Hour19,Hour20,Hour21,Hour22,Hour23,,Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec
 
-			function handleFileSelect(evt) {
-				var file = evt.target.files[0];
+				//Data is usable here
+				
+				//Hannah's favorite cheese is cheddar
 
-				Papa.parse(file, {
-					header: true,
-					dynamicTyping: true,
-					complete: function(results) {
-						data = results;
-						console.log(data);
-					}
+				console.log(data);
+				console.log(data.length)
+				
+				var table = new Tabulator("#fish-table", {
+					data:data,
+					reactiveData:true,
+					persistence:true,
+					index:"Name",
+					groupBy:"Caught",
+					columns:[
+						{title:"Caught?", field:"Caught", cellClick:function(e, cell){
+							var cellValue = cell.getValue();
+							if (cellValue == "Caught!") {
+								cell.setValue("Donated!");
+								//cell.getElement().style.backgroundColor = "#0f0";
+							};
+							if (cellValue == "Not caught!") {
+								cell.setValue("Caught!");
+								//cell.getElement().style.backgroundColor = "#ff0";
+							};
+							if (cellValue == "Donated!") {
+								cell.setValue("Not caught!");
+								//cell.getElement().style.backgroundColor = "#FFF";
+							};
+						
+						},
+							formatter:function(cell, formatterParams){
+								var value = cell.getValue();
+								if(value == "Caught!"){
+									cell.getElement().style.backgroundColor = "#ff0";
+									return value;
+								} else if (value == "Donated!"){
+									cell.getElement().style.backgroundColor = "#0f0";
+									return value;
+								} else {
+									cell.getElement().style.backgroundColor = "#FFF";
+									return value;
+								}
+							}
+						},
+						{title:"Name", field:"Name"},
+						{title:"Price", field:"Price"},
+						{title:"Location", field:"Location"},
+						{title:"Time", field:"Time"},
+						{title:"Hours",field:"Hour0", hozAlign:"center", formatter:"tickCross",  headerFilter:"tickCross",  headerFilterParams:{"tristate":true},headerFilterEmptyCheck:function(value){return value === null}},
+						{title:"Favourite Color", field:"col"},
+						{title:"Date Of Birth", field:"dob"},
+						{title:"Cheese Preference", field:"cheese"},
+					],
+					dataEdited:function(data){
+						//JSON encode data and store in local storage.
+						localStorage.setItem("tabulator-data", JSON.stringify(data));
+					},
+				});
+				document.getElementById("reactivity-changeGroup").addEventListener("click", function(){
+				table.setGroupBy("Location")
 				});
 			}
 
-			$(document).ready(function(){
-				$("#csv-file").change(handleFileSelect);
-				
-			});
-			
-			function myFunction() {
-				var file = "fish.csv"
-				Papa.parse("src/fish.csv", {
+			function parseData(url, callBack) {
+				Papa.parse(url, {
 					header: true,
 					download: true,
-					dynamicTyping: true,
+					dynamicTyping: false,
 					complete: function(results) {
-						data = results;
-						console.log(data);
+						callBack(results.data);
 					}
 				});
 			}
-			
+
+			$(document).ready(function() {
+				//Load any saved data from localStorage
+				var data =  localStorage.getItem("tabulator-data");
+
+				//If data is present fill the table with it
+				if(data){
+					doStuff(JSON.parse(data));
+				} else { 
+					parseData("src/fish.csv", doStuff);
+				};
+			});
+
 		</script>
-		<input type="file" id="csv-file" name="files"/>	
-		<button onclick="myFunction()">Click me</button>
 	</body>
 </html>
