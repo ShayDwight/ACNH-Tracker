@@ -13,7 +13,6 @@
 		<script src="js/jquery.sparkline.js"></script>
 		<div>
 			<button id="clearData" onclick="removelocalStorage()">Clear localStorage</button>
-			<button id="clearData" onclick="deleteAllCookies()">Delete Cookies</button>
 		</div>
 		<div id="fish-table"></div>
 		<script>
@@ -111,19 +110,6 @@
 				var r = confirm("Are you sure you want to clear your caught fish and bugs?");
 				if (r == true) {
 					localStorage.setItem("tabulator-data", "");
-				}
-			}
-			function deleteAllCookies() {
-				var r = confirm("Are you sure you want to delete this site's cookie?");
-				if (r == true) {
-					var cookies = document.cookie.split(";");
-
-					for (var i = 0; i < cookies.length; i++) {
-						var cookie = cookies[i];
-						var eqPos = cookie.indexOf("=");
-						var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
-						document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
-					}
 				}
 			}
 		</script>
