@@ -6,17 +6,22 @@
 
 	<body>
 		<link href="https://unpkg.com/tabulator-tables@4.6.3/dist/css/tabulator.min.css" rel="stylesheet">
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
 		<script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.6.3/dist/js/tabulator.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		<script src="js/papaparse.min.js"></script>
-		
-		<div style="height:20%">
-			<button id="clearData" onclick="removelocalStorage()">Clear localStorage</button>
-			<button id="hidePrice" onclick="togglePrice()">Toggle Price</button>
+		<div style="width:90%; margin:auto">
+			<div style="height:5%"></div>
+			<div style="height:15%">
+				<button id="clearData" class="btn btn-success" onclick="removelocalStorage()">Clear localStorage</button>
+				<button id="hidePrice" class="btn btn-success" onclick="togglePrice()">Toggle Price</button>
 
+			</div>
+			<div style="height:80%" id="fish-table"></div>
 		</div>
-		<div style="height:80%" id="fish-table"></div>
 		<script src="js/main.js"></script>
 	</body>
 </html>
