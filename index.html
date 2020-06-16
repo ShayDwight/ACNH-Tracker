@@ -11,112 +11,13 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		<script src="js/papaparse.min.js"></script>
 		<script src="js/jquery.sparkline.js"></script>
+		
 		<div>
 			<button id="clearData" onclick="removelocalStorage()">Clear localStorage</button>
+			<button id="hidePrice" onclick="togglePrice()">Toggle Price</button>
+
 		</div>
 		<div id="fish-table"></div>
-		<script>
-			function doStuff(data) {
-				//Name,Price,Location,Time,Hour0,Hour1,Hour2,Hour3,Hour4,Hour5,Hour6,Hour7,Hour8,Hour9,Hour10,Hour11,Hour12,Hour13,Hour14,Hour15,Hour16,Hour17,Hour18,Hour19,Hour20,Hour21,Hour22,Hour23,,Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec
-
-				//Data is usable here
-				
-				//Hannah's favorite cheese is cheddar
-
-				console.log(data);
-				console.log(data.length)
-				
-				var table = new Tabulator("#fish-table", {
-					data:data,
-					reactiveData:true,
-					persistence:true,
-					responsiveLayout:"collapse",
-					responsiveLayoutCollapseStartOpen:false,
-					index:"id",
-					columns:[
-						{title:"Caught?", field:"Caught", width:"10%", cellClick:function(e, cell){
-							var cellValue = cell.getValue();
-							if (cellValue == "Caught!") {
-								cell.setValue("Donated!");
-								//cell.getElement().style.backgroundColor = "#0f0";
-							};
-							if (cellValue == "Not caught!") {
-								cell.setValue("Caught!");
-								//cell.getElement().style.backgroundColor = "#ff0";
-							};
-							if (cellValue == "Donated!") {
-								cell.setValue("Not caught!");
-								//cell.getElement().style.backgroundColor = "#FFF";
-							};
-						
-						},
-							formatter:function(cell, formatterParams){
-								var value = cell.getValue();
-								if(value == "Caught!"){
-									cell.getElement().style.backgroundColor = "#ff0";
-									return value;
-								} else if (value == "Donated!"){
-									cell.getElement().style.backgroundColor = "#0f0";
-									return value;
-								} else {
-									cell.getElement().style.backgroundColor = "#FFF";
-									return value;
-								}
-							}
-						},
-						{formatter:"responsiveCollapse", headerSort:true},
-						{title:"Name", field:"Name", width:"25%"},
-						{title:"Location", field:"Location", width:"25%"},
-						{title:"Price", field:"Price", width:"15%"},
-						{title:"Time", field:"Time", width:"25%"},
-						{title:"Hours", field:"HoursN",},
-						{title:"Favourite Color", field:"col"},
-						{title:"Date Of Birth", field:"dob"},
-						{title:"Cheese Preference", field:"cheese"},
-					],
-					dataEdited:function(data){
-						//JSON encode data and store in local storage.
-						localStorage.setItem("tabulator-data", JSON.stringify(data));
-					},
-				});
-			}
-
-			function parseData(url, callBack) {
-				Papa.parse(url, {
-					header: true,
-					download: true,
-					dynamicTyping: false,
-					complete: function(results) {
-						callBack(results.data);
-					}
-				});
-			}
-
-			$(document).ready(function() {
-				//Load any saved data from localStorage
-				var data =  localStorage.getItem("tabulator-data");
-
-				//If data is present fill the table with it
-				if(data){
-					doStuff(JSON.parse(data));
-				} else { 
-					parseData("src/fish.csv", doStuff);
-				};
-				var x = document.cookie;
-				console.log(localStorage);
-				console.log("this is the last line");
-
-			});
-			
-			function removelocalStorage() {
-				//localStorage.setItem("tabulator-data", "");
-				var txt;
-				var r = confirm("Are you sure you want to clear your caught fish and bugs?");
-				if (r == true) {
-						localStorage.clear();
-					//localStorage.setItem("tabulator-data", "");
-				}
-			}
-		</script>
+		<script src="js/main3.js"></script>
 	</body>
 </html>
