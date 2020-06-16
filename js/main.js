@@ -38,6 +38,7 @@ $(document).ready(function() {
 var table = new Tabulator("#fish-table", {
 	reactiveData:true,
 	index:"id",
+	maxHeight:"90%",
 	columns:[
 		{title:"Caught?", field:"Caught", cellClick:function(e, cell){
 				var cellValue = cell.getValue();
@@ -96,7 +97,4 @@ function removelocalStorage() {
 
 function togglePrice(){
 	table.toggleColumn("Price");
-	
 }
-
-console.log(table.getColumns())
