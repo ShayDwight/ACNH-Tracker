@@ -59,14 +59,11 @@ var table = new Tabulator("#fish-table", {
 			formatter:function(cell, formatterParams){
 				var value = cell.getValue();
 				if(value == "Caught!"){
-					cell.getElement().style.backgroundColor = "#ff0";
-					return value;
+					return '<button type="button" class="btn btn-warning btn-sm btn-block">' + value + '</button>';
 				} else if (value == "Donated!"){
-					cell.getElement().style.backgroundColor = "#0f0";
-					return value;
+					return '<button type="button" class="btn btn-success btn-sm btn-block">' + value + '</button>';
 				} else {
-					cell.getElement().style.backgroundColor = "#FFF";
-					return value;
+					return '<button type="button" class="btn btn-outline-secondary btn-sm btn-block">' + value + '</button>';
 				}
 			}
 		},
@@ -91,10 +88,42 @@ function removelocalStorage() {
 	var r = confirm("Are you sure you want to clear your caught fish and bugs?");
 	if (r == true) {
 			localStorage.clear();
-		//localStorage.setItem("tabulator-data", "");
 	}
 }
 
 function togglePrice(){
 	table.toggleColumn("Price");
 }
+
+var toggleRows = ["Not caught!", "Caught!", "Donated!"];
+
+
+function toggleCaught(rows){
+	
+	var btnClass = document.getElementById(rows),
+		indexRows = toggleRows.indexOf(rows);
+
+	if (indexRows > -1){
+		toggleRows.splice(indexRows, 1);
+		if (rows == "Not caught!") {
+			btnClass.className = "btn btn-outline-secondary";
+		} else if (rows == "Caught!") {
+			btnClass.className = "btn btn-outline-warning";
+		} else if (rows == "Donated!") {
+			btnClass.className = "btn btn-outline-success";
+		}
+	} else {
+		toggleRows.push(rows);		
+		if (rows == "Not caught!") {
+			btnClass.className = "btn btn-secondary";
+		} else if (rows == "Caught!") {
+			btnClass.className = "btn btn-warning";
+		} else if (rows == "Donated!") {
+			btnClass.className = "btn btn-success";
+		}
+
+	};
+	
+	table.setFilter("Caught", "in", toggleRows);
+
+};
