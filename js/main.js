@@ -72,18 +72,39 @@ var table = new Tabulator("#fish-table", {
 		{title:"Time", field:"Time",},
 		{title:"Hours", field:"HoursN",
 			formatter:function(cell, formatterParams){
-					var cellValue = cell.getValue().split(",");
-					var indexReturn = "";
+					var cellValue = cell.getValue().split(","),
+						indexReturn = "",
+						indexMonthReturn = "",
+						currDate = new Date(),
+						currHour = currDate.getHours(),
+						currMonth = currDate.getMonth(),
+						cellMonths = cell.getData().MonthsN.split(",");
 					for (i = 0; i < cellValue.length; i++) {
-						if (cellValue[i] == "1") {
-							indexReturn += '<div class="boxyes"></div>';
-						} else {
-							indexReturn += '<div class="boxno"></div>';;
+						if (i == currHour){
+							cellValue[i] = "2";
 						};
-					};
-					console.log(cellValue);
-					console.log(indexReturn);
-					return '<div class="boxer"><div class="box-row">' + indexReturn + '</div></div>'
+						if (cellValue[i] == "1") {
+							indexReturn += '<div class="boxhouryes fa fa-check"></div>';
+						} else if (cellValue[i] == "0") {
+							indexReturn += '<div class="boxhourno fa fa-times"></div>';
+						} else if (cellValue[i] == "2") {
+							indexReturn += '<div class="boxhourclock fas fa-clock"></div>';
+						}
+					};	
+						//console.log(cellMonths.length)
+					for (i = 0; i < cellMonths.length; i++){
+						if (i == currMonth){
+							cellMonths[i] = "2";
+						};
+						if (cellMonths[i] == "1") {
+							indexMonthReturn += '<div class="boxmonthyes fa fa-check"></div>';
+						} else if (cellMonths[i] == "0") {
+							indexMonthReturn += '<div class="boxmonthno fa fa-times"></div>';
+						} else if (cellMonths[i] == "2") {
+							indexMonthReturn += '<div class="boxmonthclock fas fa-clock"></div>';
+						}
+					}
+					return '<div class="boxer"><div class="box-row-hours">' + indexReturn + '</div></div><div class="boxer"><div class="box-row-month">' + indexMonthReturn + '</div></div>'
 			}
 		},
 		{title:"Favourite Color", field:"col"},

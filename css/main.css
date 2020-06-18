@@ -3,25 +3,71 @@
    border-collapse: collapse;
 }
  
-.boxer .box-row {
+.boxer .box-row-hours {
+   display: table-row;
+   height: 30px;
+}
+.boxer .box-row-month {
    display: table-row;
    height: 30px;
 }
  
-.boxer .boxyes {
+.boxer .boxhouryes {
    display: table-cell;
-   text-align: left;
+   text-align: center;
    vertical-align: top;
    border: 1px solid black;
-   width: 10px;
+   width: 12px;
    background-color: #52BE80;
+   font-size: 10px;
 }
 
-.boxer .boxno {
+.boxer .boxhourno {
    display: table-cell;
-   text-align: left;
+   text-align: center;
+   vertical-align: bottom;
+   border: 1px solid black;
+   width: 12px;
+   background-color: #EC7063;
+   font-size: 10px;
+}
+
+.boxer .boxhourclock {
+   display: table-cell;
+   text-align: center;
+   vertical-align: middle;
+   border: 1px solid black;
+   width: 12px;
+   background-color: #85C1E9;
+   font-size: 10px;
+}
+
+.boxer .boxmonthyes {
+   display: table-cell;
+   text-align: center;
    vertical-align: top;
    border: 1px solid black;
-   width: 10px;
+   width: 24px;
+   background-color: #52BE80;
+   font-size: 10px;
+}
+
+.boxer .boxmonthno {
+   display: table-cell;
+   text-align: center;
+   vertical-align: bottom;
+   border: 1px solid black;
+   width: 24px;
    background-color: #EC7063;
+   font-size: 10px;
+}
+
+.boxer .boxmonthclock {
+   display: table-cell;
+   text-align: center;
+   vertical-align: middle;
+   border: 1px solid black;
+   width: 24px;
+   background-color: #85C1E9;
+   font-size: 10px;
 }
