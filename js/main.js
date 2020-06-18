@@ -108,7 +108,6 @@ var table = new Tabulator("#fish-table", {
 							indexMonthReturn += '<div class="boxmonthnoclock fas fa-clock"></div>';
 						};
 					};
-					console.log(cellMonths);
 					return '<div class="boxer"><div class="box-row-hours">' + indexReturn + '</div></div><div class="boxer"><div class="box-row-month">' + indexMonthReturn + '</div></div>'
 			}
 		},
