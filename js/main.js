@@ -81,29 +81,34 @@ var table = new Tabulator("#fish-table", {
 						cellMonths = cell.getData().MonthsN.split(",");
 					for (i = 0; i < cellValue.length; i++) {
 						if (i == currHour){
-							cellValue[i] = "2";
+							cellValue[i] += "2";
 						};
 						if (cellValue[i] == "1") {
 							indexReturn += '<div class="boxhouryes fa fa-check"></div>';
 						} else if (cellValue[i] == "0") {
 							indexReturn += '<div class="boxhourno fa fa-times"></div>';
-						} else if (cellValue[i] == "2") {
-							indexReturn += '<div class="boxhourclock fas fa-clock"></div>';
-						}
+						} else if (cellValue[i] == "12") {
+							indexReturn += '<div class="boxhouryesclock fas fa-clock"></div>';
+						} else if (cellValue[i] == "02") {
+							indexReturn += '<div class="boxhournoclock fas fa-clock"></div>';
+						};
 					};	
 						//console.log(cellMonths.length)
 					for (i = 0; i < cellMonths.length; i++){
 						if (i == currMonth){
-							cellMonths[i] = "2";
+							cellMonths[i] += "2";
 						};
 						if (cellMonths[i] == "1") {
 							indexMonthReturn += '<div class="boxmonthyes fa fa-check"></div>';
 						} else if (cellMonths[i] == "0") {
 							indexMonthReturn += '<div class="boxmonthno fa fa-times"></div>';
-						} else if (cellMonths[i] == "2") {
-							indexMonthReturn += '<div class="boxmonthclock fas fa-clock"></div>';
-						}
-					}
+						} else if (cellMonths[i] == "12") {
+							indexMonthReturn += '<div class="boxmonthyesclock fas fa-clock"></div>';
+						} else if (cellMonths[i] == "02") {
+							indexMonthReturn += '<div class="boxmonthnoclock fas fa-clock"></div>';
+						};
+					};
+					console.log(cellMonths);
 					return '<div class="boxer"><div class="box-row-hours">' + indexReturn + '</div></div><div class="boxer"><div class="box-row-month">' + indexMonthReturn + '</div></div>'
 			}
 		},

@@ -32,15 +32,26 @@
    font-size: 10px;
 }
 
-.boxer .boxhourclock {
+.boxer .boxhouryesclock {
    display: table-cell;
    text-align: center;
    vertical-align: middle;
    border: 1px solid black;
    width: 12px;
-   background-color: #85C1E9;
+   background-color: #398559;
    font-size: 10px;
 }
+
+.boxer .boxhournoclock {
+   display: table-cell;
+   text-align: center;
+   vertical-align: middle;
+   border: 1px solid black;
+   width: 12px;
+   background-color: #a54e45;
+   font-size: 10px;
+}
+
 
 .boxer .boxmonthyes {
    display: table-cell;
@@ -52,6 +63,17 @@
    font-size: 10px;
 }
 
+.boxer .boxmonthyesclock {
+   display: table-cell;
+   text-align: center;
+   vertical-align: middle;
+   border: 1px solid black;
+   width: 24px;
+   background-color: #398559;
+   font-size: 10px;
+}
+
+
 .boxer .boxmonthno {
    display: table-cell;
    text-align: center;
@@ -62,12 +84,12 @@
    font-size: 10px;
 }
 
-.boxer .boxmonthclock {
+.boxer .boxmonthnoclock {
    display: table-cell;
    text-align: center;
    vertical-align: middle;
    border: 1px solid black;
    width: 24px;
-   background-color: #85C1E9;
+   background-color: #a54e45;
    font-size: 10px;
 }
