@@ -1,0 +1,27 @@
+.boxer {
+   display: table;
+   border-collapse: collapse;
+}
+ 
+.boxer .box-row {
+   display: table-row;
+   height: 30px;
+}
+ 
+.boxer .boxyes {
+   display: table-cell;
+   text-align: left;
+   vertical-align: top;
+   border: 1px solid black;
+   width: 10px;
+   background-color: #52BE80;
+}
+
+.boxer .boxno {
+   display: table-cell;
+   text-align: left;
+   vertical-align: top;
+   border: 1px solid black;
+   width: 10px;
+   background-color: #EC7063;
+}

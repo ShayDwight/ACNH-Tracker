@@ -1,9 +1,8 @@
 
 function doStuff(data){
 
-//	console.log(data)
+	console.log(data.length);
 	table.setData(data);
-	
 };
 
 function parseData (url, callBack){
@@ -70,8 +69,23 @@ var table = new Tabulator("#fish-table", {
 		{title:"Name", field:"Name"},
 		{title:"Location", field:"Location"},
 		{title:"Price", field:"Price"},
-		{title:"Time", field:"Time"},
-		{title:"Hours", field:"HoursN",},
+		{title:"Time", field:"Time",},
+		{title:"Hours", field:"HoursN",
+			formatter:function(cell, formatterParams){
+					var cellValue = cell.getValue().split(",");
+					var indexReturn = "";
+					for (i = 0; i < cellValue.length; i++) {
+						if (cellValue[i] == "1") {
+							indexReturn += '<div class="boxyes"></div>';
+						} else {
+							indexReturn += '<div class="boxno"></div>';;
+						};
+					};
+					console.log(cellValue);
+					console.log(indexReturn);
+					return '<div class="boxer"><div class="box-row">' + indexReturn + '</div></div>'
+			}
+		},
 		{title:"Favourite Color", field:"col"},
 		{title:"Date Of Birth", field:"dob"},
 		{title:"Cheese Preference", field:"cheese"},
@@ -88,6 +102,7 @@ function removelocalStorage() {
 	var r = confirm("Are you sure you want to clear your caught fish and bugs?");
 	if (r == true) {
 			localStorage.clear();
+			location.reload();
 	}
 }
 
@@ -101,7 +116,8 @@ var toggleRows = ["Not caught!", "Caught!", "Donated!"];
 function toggleCaught(rows){
 	
 	var btnClass = document.getElementById(rows),
-		indexRows = toggleRows.indexOf(rows);
+		indexRows = toggleRows.indexOf(rows),
+		innerHTMLvar = document.getElementById(rows).innerHTML;
 
 	if (indexRows > -1){
 		toggleRows.splice(indexRows, 1);
@@ -112,6 +128,7 @@ function toggleCaught(rows){
 		} else if (rows == "Donated!") {
 			btnClass.className = "btn btn-outline-success";
 		}
+		
 	} else {
 		toggleRows.push(rows);		
 		if (rows == "Not caught!") {
@@ -121,7 +138,6 @@ function toggleCaught(rows){
 		} else if (rows == "Donated!") {
 			btnClass.className = "btn btn-success";
 		}
-
 	};
 	
 	table.setFilter("Caught", "in", toggleRows);
