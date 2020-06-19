@@ -151,6 +151,7 @@ function setUserState(element, option) {
 		document.getElementById('Fossils').className = "btn btn-outline-danger";
 		document.getElementById('Art').className = "btn btn-outline-dark";
 		table.removeFilter("Type", "in", (elementTypeFilter));
+		elementTypeFilter = [];
 		
 	} else if (elementType.includes(option)) {
 		
@@ -177,6 +178,7 @@ function setUserState(element, option) {
 		document.getElementById('Not caught').className = "btn btn-outline-info";
 		document.getElementById('Donated').className = "btn btn-outline-success";
 		table.removeFilter("Status", "in", elementStatusFilter);
+		elementStatusFilter = [];
 		
 	} else if (elementStatus.includes(option)){
 		
@@ -196,8 +198,11 @@ function setUserState(element, option) {
 			element.className = StatusClass
 		};
 		table.setFilter([{field:"Status", type:"in", value:elementStatusFilter}]);
-	};
 		
+	};
+		console.log(elementTypeFilter);
+		console.log(elementStatusFilter);
+		console.log(table.getFilters());
 		//SET FILTERS
 };
 	
