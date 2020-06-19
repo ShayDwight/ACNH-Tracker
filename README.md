@@ -1,7 +1,7 @@
 # ACNH-Tracker
 
 Things I'm planning on adding: 
-- bugs, fossils, and art, obviously. 
+- ~~bugs~~, fossils, and art, obviously. 
 - pictures of all, 
 - a way to sort by location via buttons (like caught, not caught, donated), (example: river, pond, sea, tree stump, palm trees, etc)
 - a way to download your current donated/caught list to be able to re-upload if something goes wrong, or an account system of some kind, probably based on google
@@ -12,5 +12,6 @@ Things I'm planning on adding:
 - a This Table is Based on This Time clock
 - a 12/24 hour selector button
 - progress bars listing completion.
+- a color-blind mode button to add/remove icons on the Availability column.
 
 if you don't think you have the latest version (the hour/month squares do NOT have any blue now), force a hard refresh by first clicking Clear localStorage, then hitting Ctrl+F5 on your keyboard. 
