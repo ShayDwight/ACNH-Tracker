@@ -18,3 +18,8 @@ Things I'm planning on adding:
   
   
 if you don't think you have the latest version (the hour/month squares do NOT have any blue now), force a hard refresh by first clicking Clear localStorage, then hitting Ctrl+F5 on your keyboard. 
+
+# Things I need to fix: 
+
+- I just noticed a slight bug. If you click Fish, then Show All, then Fish again, the button/outline for Fish (or any other Type) will disappear, and the table will be empty. Some variable I set is not clearing correctly.
+- I need to fix the hours set for some of the later-in-the-list bugs. The time shown in the Availability columns is wrong.
