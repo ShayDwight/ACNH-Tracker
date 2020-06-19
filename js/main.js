@@ -39,38 +39,39 @@ var table = new Tabulator("#fish-table", {
 	index:"id",
 	maxHeight:"90%",
 	columns:[
-		{title:"Caught?", field:"Caught", cellClick:function(e, cell){
+		{title:"Status", field:"Status", cellClick:function(e, cell){
 				var cellValue = cell.getValue();
-				if (cellValue == "Caught!") {
-					cell.setValue("Donated!");
+				if (cellValue == "Caught") {
+					cell.setValue("Donated");
 					//cell.getElement().style.backgroundColor = "#0f0";
 				};
-				if (cellValue == "Not caught!") {
-					cell.setValue("Caught!");
+				if (cellValue == "Not caught") {
+					cell.setValue("Caught");
 					//cell.getElement().style.backgroundColor = "#ff0";
 				};
-				if (cellValue == "Donated!") {
-					cell.setValue("Not caught!");
+				if (cellValue == "Donated") {
+					cell.setValue("Not caught");
 					//cell.getElement().style.backgroundColor = "#FFF";
 				};
 			
 			},
 			formatter:function(cell, formatterParams){
 				var value = cell.getValue();
-				if(value == "Caught!"){
+				if(value == "Caught"){
 					return '<button type="button" class="btn btn-warning btn-sm btn-block">' + value + '</button>';
-				} else if (value == "Donated!"){
+				} else if (value == "Donated"){
 					return '<button type="button" class="btn btn-success btn-sm btn-block">' + value + '</button>';
 				} else {
 					return '<button type="button" class="btn btn-outline-secondary btn-sm btn-block">' + value + '</button>';
 				}
 			}
 		},
+		{title:"Type", field:"Type"},
 		{title:"Name", field:"Name"},
 		{title:"Location", field:"Location"},
 		{title:"Price", field:"Price"},
 		{title:"Time", field:"Time",},
-		{title:"Hours", field:"HoursN",
+		{title:"Availability", field:"HoursN",
 			formatter:function(cell, formatterParams){
 					var cellValue = cell.getValue().split(","),
 						indexReturn = "",
@@ -135,36 +136,69 @@ function togglePrice(){
 	table.toggleColumn("Price");
 }
 
-var toggleRows = ["Not caught!", "Caught!", "Donated!"];
+var elementsAll = [],
+	elementType = ["Fish", "Bugs", "Fossils", "Art"],
+	elementTypeFilter = [],
+	elementStatus = ["Caught", "Not caught", "Donated"],
+	elementStatusFilter = [];
 
-
-function toggleCaught(rows){
-	
-	var btnClass = document.getElementById(rows),
-		indexRows = toggleRows.indexOf(rows),
-		innerHTMLvar = document.getElementById(rows).innerHTML;
-
-	if (indexRows > -1){
-		toggleRows.splice(indexRows, 1);
-		if (rows == "Not caught!") {
-			btnClass.className = "btn btn-outline-secondary";
-		} else if (rows == "Caught!") {
-			btnClass.className = "btn btn-outline-warning";
-		} else if (rows == "Donated!") {
-			btnClass.className = "btn btn-outline-success";
-		}
+function setUserState(element, option) {
 		
-	} else {
-		toggleRows.push(rows);		
-		if (rows == "Not caught!") {
-			btnClass.className = "btn btn-secondary";
-		} else if (rows == "Caught!") {
-			btnClass.className = "btn btn-warning";
-		} else if (rows == "Donated!") {
-			btnClass.className = "btn btn-success";
-		}
-	};
-	
-	table.setFilter("Caught", "in", toggleRows);
+	if (option == 'all') {
+		document.getElementById('all').className = "btn btn-secondary";
+		document.getElementById('Fish').className = "btn btn-outline-primary";
+		document.getElementById('Bugs').className = "btn btn-outline-warning";
+		document.getElementById('Fossils').className = "btn btn-outline-danger";
+		document.getElementById('Art').className = "btn btn-outline-dark";
+		table.removeFilter("Type", "in", (elementTypeFilter));
+		
+	} else if (elementType.includes(option)) {
+		
+		//TYPE FILTER ("Fish", "Bugs", "Fossils", "Art")
+		
+		document.getElementById('all').className = "btn btn-outline-secondary";
 
+		if (elementTypeFilter.includes(option)){
+			var indexOption = elementTypeFilter.indexOf(option);
+			elementTypeFilter.splice(indexOption, 1);
+			var typeClass = element.className.replace("btn btn-", "btn btn-outline-");
+			element.className = typeClass
+		} else {
+			elementTypeFilter.push(option);
+			var typeClass = element.className.replace("btn btn-outline-", "btn btn-");
+			element.className = typeClass
+		};
+		table.setFilter([{field:"Type", type:"in", value:elementTypeFilter}]);
+	};
+
+	if (option == "allStatus") {
+		document.getElementById('allStatus').className = "btn btn-secondary";
+		document.getElementById('Caught').className = "btn btn-outline-warning";
+		document.getElementById('Not caught').className = "btn btn-outline-info";
+		document.getElementById('Donated').className = "btn btn-outline-success";
+		table.removeFilter("Status", "in", elementStatusFilter);
+		
+	} else if (elementStatus.includes(option)){
+		
+		//STATUS FILTER ("Caught", "Not caught", "Donated")
+		
+		document.getElementById('allStatus').className = "btn btn-outline-secondary";
+
+		
+		if (elementStatusFilter.includes(option)){
+			var indexOption = elementStatusFilter.indexOf(option);
+			elementStatusFilter.splice(indexOption, 1);
+			var StatusClass = element.className.replace("btn btn-", "btn btn-outline-");
+			element.className = StatusClass
+		} else {
+			elementStatusFilter.push(option);
+			var StatusClass = element.className.replace("btn btn-outline-", "btn btn-");
+			element.className = StatusClass
+		};
+		table.setFilter([{field:"Status", type:"in", value:elementStatusFilter}]);
+	};
+		
+		//SET FILTERS
 };
+	
+
