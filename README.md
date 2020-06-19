@@ -17,7 +17,7 @@ Things I'm planning on adding:
   - S hemisphere fish months (and bugs) selector
   
   
-if you don't think you have the latest version (the hour/month squares do NOT have any blue now), force a hard refresh by first clicking Clear localStorage, then hitting Ctrl+F5 on your keyboard. 
+if you don't think you have the latest version (There's a *NEW* row of buttons at the top! (Fossils and Art are *not yet* implemented, but Bugs are!)), force a hard refresh by first clicking Clear localStorage, then hitting Ctrl+F5 on your keyboard. 
 
 # Things I need to fix: 
 
