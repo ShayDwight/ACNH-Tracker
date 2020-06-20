@@ -189,9 +189,16 @@ function togglePrice(){
 
 function toggleHemi(){
 	var colN = table.getColumn("HoursN"),
-		colS = table.getColumn("HoursS");
+		colS = table.getColumn("HoursS"),
+		colNVis = colN.getVisibility();
 		colN.toggle();
 		colS.toggle();
+		console.log(colNVis);
+		if (!colNVis) {
+			document.getElementById("toggleHemi").innerHTML = "Northern Hemisphere";
+		} else {
+			document.getElementById("toggleHemi").innerHTML = "Southern Hemisphere";
+		};
 }
 
 
