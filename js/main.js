@@ -1,3 +1,5 @@
+var monthSet = "MonthsN";
+
 
 function doStuff(data){
 
@@ -66,52 +68,101 @@ var table = new Tabulator("#fish-table", {
 				}
 			}
 		},
-		{title:"Type", field:"Type"},
+		{title:"Icon", field:"IconFilename", formatter:function(cell, formatterParams){
+			var cellValue = cell.getValue();
+			return '<img width="50" height="50" src ="https://acnhcdn.com/latest/MenuIcon/' + cellValue + '.png">'
+		}},
 		{title:"Name", field:"Name"},
 		{title:"Location", field:"Location"},
 		{title:"Price", field:"Price"},
 		{title:"Time", field:"Time",},
-		{title:"Availability", field:"HoursN",
+		{title:"Availability (Northern Hemisphere)", field:"HoursN",
 			formatter:function(cell, formatterParams){
-					var cellValue = cell.getValue().split(","),
-						indexReturn = "",
-						indexMonthReturn = "",
-						currDate = new Date(),
-						currHour = currDate.getHours(),
-						currMonth = currDate.getMonth(),
-						cellMonths = cell.getData().MonthsN.split(",");
-					for (i = 0; i < cellValue.length; i++) {
-						if (i == currHour){
-							cellValue[i] += "2";
-						};
-						if (cellValue[i] == "1") {
-							indexReturn += '<div class="boxhouryes fa fa-check"></div>';
-						} else if (cellValue[i] == "0") {
-							indexReturn += '<div class="boxhourno fa fa-times"></div>';
-						} else if (cellValue[i] == "12") {
-							indexReturn += '<div class="boxhouryesclock fas fa-clock"></div>';
-						} else if (cellValue[i] == "02") {
-							indexReturn += '<div class="boxhournoclock fas fa-clock"></div>';
-						};
-					};	
-						//console.log(cellMonths.length)
-					for (i = 0; i < cellMonths.length; i++){
-						if (i == currMonth){
-							cellMonths[i] += "2";
-						};
-						if (cellMonths[i] == "1") {
-							indexMonthReturn += '<div class="boxmonthyes fa fa-check"></div>';
-						} else if (cellMonths[i] == "0") {
-							indexMonthReturn += '<div class="boxmonthno fa fa-times"></div>';
-						} else if (cellMonths[i] == "12") {
-							indexMonthReturn += '<div class="boxmonthyesclock fas fa-clock"></div>';
-						} else if (cellMonths[i] == "02") {
-							indexMonthReturn += '<div class="boxmonthnoclock fas fa-clock"></div>';
-						};
+				var cellValue = cell.getValue().split(","),
+					indexReturn = "",
+					indexMonthReturn = "",
+					currDate = new Date(),
+					currHour = currDate.getHours(),
+					currMonth = currDate.getMonth(),
+					cellMonths = cell.getData().MonthsN.split(",")
+					selectHemi = cellMonths;
+				for (i = 0; i < cellValue.length; i++) {
+					if (i == currHour){
+						cellValue[i] += "2";
 					};
-					return '<div class="boxer"><div class="box-row-hours">' + indexReturn + '</div></div><div class="boxer"><div class="box-row-month">' + indexMonthReturn + '</div></div>'
+					if (cellValue[i] == "1") {
+						indexReturn += '<div class="boxhouryes fa fa-check"></div>';
+					} else if (cellValue[i] == "0") {
+						indexReturn += '<div class="boxhourno fa fa-times"></div>';
+					} else if (cellValue[i] == "12") {
+						indexReturn += '<div class="boxhouryesclock fas fa-clock"></div>';
+					} else if (cellValue[i] == "02") {
+						indexReturn += '<div class="boxhournoclock fas fa-clock"></div>';
+					};
+				};	
+					//console.log(cellMonths.length)
+				for (i = 0; i < cellMonths.length; i++){
+					if (i == currMonth){
+						cellMonths[i] += "2";
+					};
+					if (cellMonths[i] == "1") {
+						indexMonthReturn += '<div class="boxmonthyes fa fa-check"></div>';
+					} else if (cellMonths[i] == "0") {
+						indexMonthReturn += '<div class="boxmonthno fa fa-times"></div>';
+					} else if (cellMonths[i] == "12") {
+						indexMonthReturn += '<div class="boxmonthyesclock fas fa-clock"></div>';
+					} else if (cellMonths[i] == "02") {
+						indexMonthReturn += '<div class="boxmonthnoclock fas fa-clock"></div>';
+					};
+				};
+				return '<div class="boxer"><div class="box-row-hours">' + indexReturn + '</div></div><div class="boxer"><div class="box-row-month">' + indexMonthReturn + '</div></div>'
 			}
 		},
+		{title:"Availability (Southern Hemisphere)", field:"HoursS", visible:false,
+			formatter:function(cell, formatterParams){
+				var cellValue = cell.getValue().split(","),
+					indexReturn = "",
+					indexMonthReturn = "",
+					currDate = new Date(),
+					currHour = currDate.getHours(),
+					currMonth = currDate.getMonth(),
+					cellMonths = cell.getData().MonthsS.split(",")
+					selectHemi = cellMonths;
+				for (i = 0; i < cellValue.length; i++) {
+					if (i == currHour){
+						cellValue[i] += "2";
+					};
+					if (cellValue[i] == "1") {
+						indexReturn += '<div class="boxhouryes fa fa-check"></div>';
+					} else if (cellValue[i] == "0") {
+						indexReturn += '<div class="boxhourno fa fa-times"></div>';
+					} else if (cellValue[i] == "12") {
+						indexReturn += '<div class="boxhouryesclock fas fa-clock"></div>';
+					} else if (cellValue[i] == "02") {
+						indexReturn += '<div class="boxhournoclock fas fa-clock"></div>';
+					};
+				};	
+					//console.log(cellMonths.length)
+				for (i = 0; i < cellMonths.length; i++){
+					if (i == currMonth){
+						cellMonths[i] += "2";
+					};
+					if (cellMonths[i] == "1") {
+						indexMonthReturn += '<div class="boxmonthyes fa fa-check"></div>';
+					} else if (cellMonths[i] == "0") {
+						indexMonthReturn += '<div class="boxmonthno fa fa-times"></div>';
+					} else if (cellMonths[i] == "12") {
+						indexMonthReturn += '<div class="boxmonthyesclock fas fa-clock"></div>';
+					} else if (cellMonths[i] == "02") {
+						indexMonthReturn += '<div class="boxmonthnoclock fas fa-clock"></div>';
+					};
+				};
+				return '<div class="boxer"><div class="box-row-hours">' + indexReturn + '</div></div><div class="boxer"><div class="box-row-month">' + indexMonthReturn + '</div></div>'
+			}
+		},
+		{title:"MonthsN", field:"MonthsN", visible:false},
+		{title:"MonthsS", field:"MonthsS", visible:false},
+
 		{title:"Favourite Color", field:"col"},
 		{title:"Date Of Birth", field:"dob"},
 		{title:"Cheese Preference", field:"cheese"},
@@ -135,6 +186,14 @@ function removelocalStorage() {
 function togglePrice(){
 	table.toggleColumn("Price");
 }
+
+function toggleHemi(){
+	var colN = table.getColumn("HoursN"),
+		colS = table.getColumn("HoursS");
+		colN.toggle();
+		colS.toggle();
+}
+
 
 var elementsAll = [],
 	elementType = ["Fish", "Bugs", "Fossils", "Art"],
@@ -205,5 +264,3 @@ function setUserState(element, option) {
 		console.log(table.getFilters());
 		//SET FILTERS
 };
-	
-
