@@ -3,7 +3,7 @@ var monthSet = "MonthsN";
 
 function doStuff(data){
 
-	console.log(data.length);
+	//console.log(data.length);
 	table.setData(data);
 };
 
@@ -32,9 +32,36 @@ $(document).ready(function() {
 	var x = document.cookie;
 //	console.log(localStorage);
 //	console.log("this is the last line");
+	for (i = 0; i < localStorage.length; i++){
+		var localStorageKeyName = localStorage.key(i),
+			localStorageKeyValue = localStorage.getItem(localStorageKeyName);
+		console.log(localStorage.key(i) + ": " + localStorage.getItem(localStorageKeyName));
+		//Check Hemisphere
+		//console.log("localStorageKeyValue: " + localStorageKeyValue);
+		if (localStorageKeyName.includes("hemisphere")) {
+			if (localStorageKeyValue == "true") {
+				toggleHemi();
+			}
+		}
+		
+	}
 
 });
 
+// Fields:
+// Status - Status
+// Icon - IconFilename
+// Name - Name
+// Location - Location
+// Price - Price
+// Time - Time
+// Availability (Northern Hemisphere) - HoursN)
+// Availability (Southern Hemisphere) - HoursS)
+// MonthsN - MonthsN
+// MonthsS - MonthsS
+// Extra
+// Extra
+// Extra
 
 var table = new Tabulator("#fish-table", {
 	reactiveData:true,
@@ -42,36 +69,62 @@ var table = new Tabulator("#fish-table", {
 	maxHeight:"90%",
 	columns:[
 		{title:"Status", field:"Status", cellClick:function(e, cell){
-				var cellValue = cell.getValue();
-				if (cellValue == "Caught") {
-					cell.setValue("Donated");
-					//cell.getElement().style.backgroundColor = "#0f0";
-				};
-				if (cellValue == "Not caught") {
-					cell.setValue("Caught");
-					//cell.getElement().style.backgroundColor = "#ff0";
-				};
-				if (cellValue == "Donated") {
-					cell.setValue("Not caught");
-					//cell.getElement().style.backgroundColor = "#FFF";
-				};
-			
-			},
-			formatter:function(cell, formatterParams){
-				var value = cell.getValue();
-				if(value == "Caught"){
-					return '<button type="button" class="btn btn-warning btn-sm btn-block">' + value + '</button>';
-				} else if (value == "Donated"){
-					return '<button type="button" class="btn btn-success btn-sm btn-block">' + value + '</button>';
-				} else {
-					return '<button type="button" class="btn btn-outline-secondary btn-sm btn-block">' + value + '</button>';
-				}
-			}
+			statusClick(cell);
 		},
-		{title:"Icon", field:"IconFilename", formatter:function(cell, formatterParams){
-			var cellValue = cell.getValue();
-			return '<img width="50" height="50" src ="https://acnhcdn.com/latest/MenuIcon/' + cellValue + '.png">'
+		formatter:function(cell, formatterParams){
+			var value = cell.getValue();
+			if(value == "Caught"){
+				return '<button type="button" class="btn btn-warning btn-sm btn-block">' + value + '</button>';
+			} else if (value == "Donated"){
+				return '<button type="button" class="btn btn-success btn-sm btn-block">' + value + '</button>';
+			} else {
+				return '<button type="button" class="btn btn-outline-secondary btn-sm btn-block">' + value + '</button>';
+			}
+		}
+		},
+		{title:"Icon", field:"IconFilenameN", formatter:function(cell, formatterParams){
+			var cellValue = cell.getValue(),
+				cellClass,
+				cellCheckCross,
+				currDate = new Date(),
+				currHour = currDate.getHours(),
+				currMonth = currDate.getMonth(),
+				activeHours = cell.getData().HoursN.split(","),
+				activeHourNow = activeHours[currHour], 
+				colN = table.getColumn("HoursN"),
+				activeMonths = cell.getData().MonthsN.split(","),
+				activeMonthNow = activeMonths[currMonth];
+			if (activeHourNow == 1 && activeMonthNow == 1){
+				cellClass = "alert alert-success";
+				cellCheckCross = "fa fa-check"
+			} else {
+				cellClass = "alert alert-danger";
+				cellCheckCross = "fa fa-times";
+			};
+			return '<div id="' + cellValue + '" class="' + cellClass + '"><img width="50" height="50" src="https://acnhcdn.com/latest/MenuIcon/' + cellValue + '.png"></br><div class="' + cellCheckCross + '" style="text-align: center; width:100%"></div></div>'
 		}},
+		{title:"Icon", field:"IconFilenameS", visible:false, formatter:function(cell, formatterParams){
+			var cellValue = cell.getValue(),
+				cellClass,
+				cellCheckCross,
+				currDate = new Date(),
+				currHour = currDate.getHours(),
+				currMonth = currDate.getMonth(),
+				activeHours = cell.getData().HoursS.split(","),
+				activeHourNow = activeHours[currHour], 
+				colS = table.getColumn("HoursS"),
+				activeMonths = cell.getData().MonthsS.split(","),
+				activeMonthNow = activeMonths[currMonth];
+			if (activeHourNow == 1 && activeMonthNow == 1){
+				cellClass = "alert alert-success";
+				cellCheckCross = "fa fa-check"
+			} else {
+				cellClass = "alert alert-danger";
+				cellCheckCross = "fa fa-times"
+			};
+			return '<div id="' + cellValue + '" class="' + cellClass + '"><img width="50" height="50" src="https://acnhcdn.com/latest/MenuIcon/' + cellValue + '.png"></br><div class="' + cellCheckCross + '" style="text-align: center; width:100%"></div></div>'
+		}},
+
 		{title:"Name", field:"Name"},
 		{title:"Location", field:"Location"},
 		{title:"Price", field:"Price"},
@@ -162,8 +215,11 @@ var table = new Tabulator("#fish-table", {
 		},
 		{title:"MonthsN", field:"MonthsN", visible:false},
 		{title:"MonthsS", field:"MonthsS", visible:false},
-
-		{title:"Favourite Color", field:"col"},
+		{title:"Available Now N", field:"AvailableN", formatter:function(cell, formatterParams){
+			var cellAvail = cell.getElement().IconFilenameN;
+			console.log(cellAvail);
+		}},
+		{title:"Available Now S", field:"AvailableS"},
 		{title:"Date Of Birth", field:"dob"},
 		{title:"Cheese Preference", field:"cheese"},
 	],
@@ -187,23 +243,62 @@ function togglePrice(){
 	table.toggleColumn("Price");
 }
 
+function statusClick(cell){
+	var cellValue = cell.getValue(),
+		critterID = cell.getData().IconFilename;
+	if (cellValue == "Caught") {
+		cell.setValue("Donated");
+	};
+	if (cellValue == "Not caught") {
+		cell.setValue("Caught");
+	};
+	if (cellValue == "Donated") {
+		cell.setValue("Not caught");
+	};
+	cellValue = cell.getValue();
+};
+
+
+
 function toggleHemi(){
 	var colN = table.getColumn("HoursN"),
 		colS = table.getColumn("HoursS"),
+		colIconN = table.getColumn("IconFilenameN"),
+		colIconS = table.getColumn("IconFilenameS"),
+		
 		colNVis = colN.getVisibility();
 		colN.toggle();
 		colS.toggle();
-		console.log(colNVis);
+		colIconN.toggle();
+		colIconS.toggle();
+		
+		//console.log(colNVis);
 		if (!colNVis) {
 			document.getElementById("toggleHemi").innerHTML = "Northern Hemisphere";
+			localStorage.setItem("hemisphere", false);
 		} else {
 			document.getElementById("toggleHemi").innerHTML = "Southern Hemisphere";
+			localStorage.setItem("hemisphere", true);
 		};
+		console.log("hemisphere state (true = south): " + localStorage.getItem("hemisphere"));
+
+};
+
+function toggleAvail(){
+	var colN = table.getColumn("HoursN"),
+		colS = table.getColumn("HoursS"),
+		colIconN = table.getColumn("IconFilenameN"),
+		colIconS = table.getColumn("IconFilenameS"),
+		
+		colNVis = colN.getVisibility();
+	//
+	
+	table.setFilter([{field:"", type:"in", value:""}]);
 }
 
 
 var elementsAll = [],
-	elementType = ["Fish", "Bugs", "Fossils", "Art"],
+	elementType = ["Fish", "Bugs", "Sea", "Fossils", "Art"],
 	elementTypeFilter = [],
 	elementStatus = ["Caught", "Not caught", "Donated"],
 	elementStatusFilter = [];
@@ -214,6 +309,7 @@ function setUserState(element, option) {
 		document.getElementById('all').className = "btn btn-secondary";
 		document.getElementById('Fish').className = "btn btn-outline-primary";
 		document.getElementById('Bugs').className = "btn btn-outline-warning";
+		document.getElementById('Sea').className = "btn btn-outline-warning";
 		document.getElementById('Fossils').className = "btn btn-outline-danger";
 		document.getElementById('Art').className = "btn btn-outline-dark";
 		table.removeFilter("Type", "in", (elementTypeFilter));
@@ -221,7 +317,7 @@ function setUserState(element, option) {
 		
 	} else if (elementType.includes(option)) {
 		
-		//TYPE FILTER ("Fish", "Bugs", "Fossils", "Art")
+		//TYPE FILTER ("Fish", "Bugs", "Sea", "Fossils", "Art")
 		
 		document.getElementById('all').className = "btn btn-outline-secondary";
 
@@ -266,8 +362,8 @@ function setUserState(element, option) {
 		table.setFilter([{field:"Status", type:"in", value:elementStatusFilter}]);
 		
 	};
-		console.log(elementTypeFilter);
-		console.log(elementStatusFilter);
-		console.log(table.getFilters());
+		//console.log(elementTypeFilter);
+		//console.log(elementStatusFilter);
+		//console.log(table.getFilters());
 		//SET FILTERS
 };

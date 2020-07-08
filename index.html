@@ -20,10 +20,12 @@
 				<button id="clearData" class="btn btn-success" onclick="removelocalStorage()">Clear localStorage</button>
 				<button id="hidePrice" class="btn btn-outline-success" onclick="togglePrice()">Toggle Price</button>
 				<button id="toggleHemi" class="btn btn-outline-success" onclick="toggleHemi()">Northern Hemisphere</button>
+				<button id="toggleAvail" class="btn btn-outline-success" onclick="toggleAvail()">Show Available Now</button>
 				<div class="btn-group">
 					<button type="button" id="all" class="btn btn-secondary" onclick="setUserState(this, 'all')">Show All</button>
 					<button type="button" id="Fish" class="btn btn-outline-primary" onclick="setUserState(this, 'Fish')"><img src="img/FishingRodIcon.png" width="30" height="30"> Fish</button>
 					<button type="button" id="Bugs" class="btn btn-outline-warning" onclick="setUserState(this, 'Bugs')"><img src="img/NetIcon.png" width="30" height="30"> Bugs</button>
+					<button type="button" id="Sea" class="btn btn-outline-warning" onclick="setUserState(this, 'Sea')"><img src="img/WetSuit.png" width="30" height="30"> Sea</button>
 					<button type="button" id="Fossils" class="btn btn-outline-danger" onclick="setUserState(this, 'Fossils')"><img src="img/AssessedFossil.png" width="30" height="30"> Fossils</button>
 					<button type="button" id="Art" class="btn btn-outline-dark" onclick="setUserState(this, 'Art')"><img src="img/FurnitureIcon.png" width="30" height="30"> Art</button>
 				</div>
