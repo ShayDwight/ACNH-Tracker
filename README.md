@@ -18,9 +18,7 @@ Things I'm planning on adding:
 
 # New Things Since Last Update!
 
-- Images for critters!
-- Icons for Fish/Bugs/Fossils/Art
-- Toggle Hemi(sphere) button
+- Added Sea Creatures!
   
 As always, if you don't see what's new, force a clean refresh by first clicking Clear localStorage, and then forcing a refresh by hitting Ctrl+F5 on your keyboard! 
 
