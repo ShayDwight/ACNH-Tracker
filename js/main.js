@@ -1,4 +1,7 @@
-var monthSet = "MonthsN";
+var currDate = new Date(),
+	currHour = currDate.getHours(),
+	currMonth = currDate.getMonth();
+
 
 
 function doStuff(data){
@@ -86,9 +89,6 @@ var table = new Tabulator("#fish-table", {
 			var cellValue = cell.getValue(),
 				cellClass,
 				cellCheckCross,
-				currDate = new Date(),
-				currHour = currDate.getHours(),
-				currMonth = currDate.getMonth(),
 				activeHours = cell.getData().HoursN.split(","),
 				activeHourNow = activeHours[currHour], 
 				colN = table.getColumn("HoursN"),
@@ -107,22 +107,22 @@ var table = new Tabulator("#fish-table", {
 			var cellValue = cell.getValue(),
 				cellClass,
 				cellCheckCross,
-				currDate = new Date(),
-				currHour = currDate.getHours(),
-				currMonth = currDate.getMonth(),
+				availStatus,
 				activeHours = cell.getData().HoursS.split(","),
 				activeHourNow = activeHours[currHour], 
 				colS = table.getColumn("HoursS"),
 				activeMonths = cell.getData().MonthsS.split(","),
-				activeMonthNow = activeMonths[currMonth];
+				activeMonthNow = activeMonths[currMonth],
+				fishName = cell.getData().Name;
 			if (activeHourNow == 1 && activeMonthNow == 1){
 				cellClass = "alert alert-success";
 				cellCheckCross = "fa fa-check"
 			} else {
 				cellClass = "alert alert-danger";
 				cellCheckCross = "fa fa-times"
+				availStatus = "Not Available"
 			};
-			return '<div id="' + cellValue + '" class="' + cellClass + '"><img width="50" height="50" src="https://acnhcdn.com/latest/MenuIcon/' + cellValue + '.png"></br><div class="' + cellCheckCross + '" style="text-align: center; width:100%"></div></div>'
+			return '<div id="' + cellValue + '" class="' + cellClass + '" style="text-align: center; width:100%"><img width="50" height="50" src="https://acnhcdn.com/latest/MenuIcon/' + cellValue + '.png"></br><div class="' + cellCheckCross + '" style="text-align: center; width:100%"></div></div>'
 		}},
 
 		{title:"Name", field:"Name"},
@@ -134,9 +134,6 @@ var table = new Tabulator("#fish-table", {
 				var cellValue = cell.getValue().split(","),
 					indexReturn = "",
 					indexMonthReturn = "",
-					currDate = new Date(),
-					currHour = currDate.getHours(),
-					currMonth = currDate.getMonth(),
 					cellMonths = cell.getData().MonthsN.split(",")
 					selectHemi = cellMonths;
 				for (i = 0; i < cellValue.length; i++) {
@@ -176,9 +173,6 @@ var table = new Tabulator("#fish-table", {
 				var cellValue = cell.getValue().split(","),
 					indexReturn = "",
 					indexMonthReturn = "",
-					currDate = new Date(),
-					currHour = currDate.getHours(),
-					currMonth = currDate.getMonth(),
 					cellMonths = cell.getData().MonthsS.split(",")
 					selectHemi = cellMonths;
 				for (i = 0; i < cellValue.length; i++) {
@@ -216,10 +210,27 @@ var table = new Tabulator("#fish-table", {
 		{title:"MonthsN", field:"MonthsN", visible:false},
 		{title:"MonthsS", field:"MonthsS", visible:false},
 		{title:"Available Now N", field:"AvailableN", formatter:function(cell, formatterParams){
-			var cellAvail = cell.getElement().IconFilenameN;
-			console.log(cellAvail);
+			var activeHours = cell.getData().HoursN.split(","),
+				activeHourNow = activeHours[currHour],
+				activeMonths = cell.getData().MonthsN.split(","),
+				activeMonthNow = activeMonths[currMonth];
+			if (activeHourNow == 1 && activeMonthNow == 1){
+				return "Yes";
+			} else {
+				return "No";
+			};			
 		}},
-		{title:"Available Now S", field:"AvailableS"},
+		{title:"Available Now S", field:"AvailableS", formatter:function(cell, formatterParams){
+			var activeHours = cell.getData().HoursS.split(","),
+				activeHourNow = activeHours[currHour],
+				activeMonths = cell.getData().MonthsS.split(","),
+				activeMonthNow = activeMonths[currMonth];
+			if (activeHourNow == 1 && activeMonthNow == 1){
+				return "Yes";
+			} else {
+				return "No";
+			};			
+		}},
 		{title:"Date Of Birth", field:"dob"},
 		{title:"Cheese Preference", field:"cheese"},
 	],
@@ -285,15 +296,16 @@ function toggleHemi(){
 };
 
 function toggleAvail(){
-	var colN = table.getColumn("HoursN"),
-		colS = table.getColumn("HoursS"),
-		colIconN = table.getColumn("IconFilenameN"),
-		colIconS = table.getColumn("IconFilenameS"),
-		
+	var colN = table.getColumn("HoursN"),		
 		colNVis = colN.getVisibility();
+		console.log(colNVis)
 	//
-	
-	table.setFilter([{field:"", type:"in", value:""}]);
+	if (colNVis) {
+		table.setFilter("AvailableN", "like", "Yes");
+
+	} else {
+		table.setFilter("AvailableS", "like", "Yes");
+	}
 }
 
 
