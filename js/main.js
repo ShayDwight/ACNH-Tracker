@@ -307,10 +307,10 @@ function toggleAvail(){
 		console.log(colNVis)
 	//
 	if (colNVis) {
-		table.setFilter("AvailableN", "like", "Yes");
+		table.addFilter("AvailableN", "like", "Yes");
 
 	} else {
-		table.setFilter("AvailableS", "like", "Yes");
+		table.addFilter("AvailableS", "like", "Yes");
 	}
 };
 
