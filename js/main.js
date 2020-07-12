@@ -237,8 +237,8 @@ var table = new Tabulator("#fish-table", {
 		{title:"MonthsN", field:"MonthsN", visible:false},
 		{title:"MonthsS", field:"MonthsS", visible:false},
 
-		{title:"Available Now N", field:"AvailableN", mutator:customMutatorN},
-		{title:"Available Now S", field:"AvailableS", mutator:customMutatorS},
+		{title:"Available Now N", field:"AvailableN", mutator:customMutatorN, visible:false},
+		{title:"Available Now S", field:"AvailableS", mutator:customMutatorS, visible:false},
 		{title:"Date Of Birth", field:"dob"},
 		{title:"Cheese Preference", field:"cheese"},
 	],
