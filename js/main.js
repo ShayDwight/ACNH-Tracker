@@ -66,6 +66,33 @@ $(document).ready(function() {
 // Extra
 // Extra
 
+var customMutatorN = function(value, data, type, params, component){
+	var activeHours = data.HoursN.split(","),
+		activeHourNow = activeHours[currHour],
+		activeMonths = data.MonthsN.split(","),
+		activeMonthNow = activeMonths[currMonth];
+	if (activeHourNow == 1 && activeMonthNow == 1){
+		value = "Yes";
+	} else {
+		value = "No";
+	};			
+
+	return value;
+}
+
+var customMutatorS = function(value, data, type, params, component){
+	var activeHours = data.HoursS.split(","),
+		activeHourNow = activeHours[currHour],
+		activeMonths = data.MonthsS.split(","),
+		activeMonthNow = activeMonths[currMonth];
+	if (activeHourNow == 1 && activeMonthNow == 1){
+		value = "Yes";
+	} else {
+		value = "No";
+	};	
+		return value;
+}
+
 var table = new Tabulator("#fish-table", {
 	reactiveData:true,
 	index:"id",
@@ -209,28 +236,9 @@ var table = new Tabulator("#fish-table", {
 		},
 		{title:"MonthsN", field:"MonthsN", visible:false},
 		{title:"MonthsS", field:"MonthsS", visible:false},
-		{title:"Available Now N", field:"AvailableN", formatter:function(cell, formatterParams){
-			var activeHours = cell.getData().HoursN.split(","),
-				activeHourNow = activeHours[currHour],
-				activeMonths = cell.getData().MonthsN.split(","),
-				activeMonthNow = activeMonths[currMonth];
-			if (activeHourNow == 1 && activeMonthNow == 1){
-				return "Yes";
-			} else {
-				return "No";
-			};			
-		}},
-		{title:"Available Now S", field:"AvailableS", formatter:function(cell, formatterParams){
-			var activeHours = cell.getData().HoursS.split(","),
-				activeHourNow = activeHours[currHour],
-				activeMonths = cell.getData().MonthsS.split(","),
-				activeMonthNow = activeMonths[currMonth];
-			if (activeHourNow == 1 && activeMonthNow == 1){
-				return "Yes";
-			} else {
-				return "No";
-			};			
-		}},
+
+		{title:"Available Now N", field:"AvailableN", mutator:customMutatorN},
+		{title:"Available Now S", field:"AvailableS", mutator:customMutatorS},
 		{title:"Date Of Birth", field:"dob"},
 		{title:"Cheese Preference", field:"cheese"},
 	],
@@ -269,8 +277,6 @@ function statusClick(cell){
 	cellValue = cell.getValue();
 };
 
-
-
 function toggleHemi(){
 	var colN = table.getColumn("HoursN"),
 		colS = table.getColumn("HoursS"),
@@ -306,8 +312,7 @@ function toggleAvail(){
 	} else {
 		table.setFilter("AvailableS", "like", "Yes");
 	}
-}
-
+};
 
 var elementsAll = [],
 	elementType = ["Fish", "Bugs", "Sea", "Fossils", "Art"],
@@ -360,7 +365,6 @@ function setUserState(element, option) {
 		
 		document.getElementById('allStatus').className = "btn btn-outline-secondary";
 
-		
 		if (elementStatusFilter.includes(option)){
 			var indexOption = elementStatusFilter.indexOf(option);
 			elementStatusFilter.splice(indexOption, 1);
