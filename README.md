@@ -1,7 +1,7 @@
 # ACNH-Tracker
 
 Things I'm planning on adding: 
-- ~~bugs, fossils, and art, obviously. ~~
+- ~~bugs, fossils, and art, obviously.~~
 - ~~pictures of all~~
 - a way to sort by location via buttons (like caught, not caught, donated), (example: river, pond, sea, tree stump, palm trees, etc)
 - a way to download your current donated/caught list to be able to re-upload if something goes wrong, or an account system of some kind, probably based on google
@@ -20,7 +20,7 @@ Things I'm planning on adding:
 
 Added **Show Available Now** button that *actually* works! It's not toggleable yet, but it works for both N and S Hemisphere! To reset it showing to ALL critters, Refresh the page!
 
-~~- Added Sea Creatures!~~
+- ~~Added Sea Creatures!~~
   
 As always, if you don't see what's new, force a clean refresh by first clicking Clear localStorage, and then forcing a refresh by hitting Ctrl+F5 on your keyboard! 
 
