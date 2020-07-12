@@ -18,8 +18,7 @@ Things I'm planning on adding:
 
 # New Things Since Last Update!
 
-Added **Show Available Now** button that *actually* works! It's not toggleable yet, but it works for both N and S Hemisphere! To reset it showing to ALL critters, Refresh the page!
-
+- Added **Show Available Now** button that *actually* works! It's not toggleable yet, but it works for both N and S Hemisphere! To reset it showing to ALL critters, Refresh the page!
 - ~~Added Sea Creatures!~~
   
 As always, if you don't see what's new, force a clean refresh by first clicking Clear localStorage, and then forcing a refresh by hitting Ctrl+F5 on your keyboard! 
