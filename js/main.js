@@ -348,7 +348,7 @@ function setUserState(element, option) {
 			var typeClass = element.className.replace("btn btn-outline-", "btn btn-");
 			element.className = typeClass
 		};
-		table.setFilter([{field:"Type", type:"in", value:elementTypeFilter}]);
+		table.addFilter([{field:"Type", type:"in", value:elementTypeFilter}]);
 	};
 
 	if (option == "allStatus") {
@@ -375,7 +375,7 @@ function setUserState(element, option) {
 			var StatusClass = element.className.replace("btn btn-outline-", "btn btn-");
 			element.className = StatusClass
 		};
-		table.setFilter([{field:"Status", type:"in", value:elementStatusFilter}]);
+		table.addFilter([{field:"Status", type:"in", value:elementStatusFilter}]);
 		
 	};
 		//console.log(elementTypeFilter);
