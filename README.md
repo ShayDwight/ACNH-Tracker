@@ -5,7 +5,7 @@ Things I'm planning on adding:
 - ~~pictures of all~~
 - a way to sort by location via buttons (like caught, not caught, donated), (example: river, pond, sea, tree stump, palm trees, etc)
 - a way to download your current donated/caught list to be able to re-upload if something goes wrong, or an account system of some kind, probably based on google
-- a way to show only available fish/bugs, last chance fish/bugs, 
+- a way to show ~~only available fish/bugs~~, last chance fish/bugs, 
 - a Last Updated clock
 - a This Table is Based on This Time clock
 - progress bars listing completion
