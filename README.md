@@ -18,6 +18,8 @@ Things I'm planning on adding:
 
 # New Things Since Last Update!
 
+- Separated out Critter Filters and Caught (Status) Filters into their own functions. As such, you can now only select **ONE** Critter Type and Status Type instead of being able to select multiple Types at the same time. It should make further updates easier, as well as being able to code in Location Filters (River, Pond, Tree Stump, etc). 
+
 - Added **Show Available Now** button that *actually* works! It's not toggleable yet, but it works for both N and S Hemisphere! To reset it showing to ALL critters, Refresh the page!
 - ~~Added Sea Creatures!~~
   
@@ -25,4 +27,4 @@ As always, if you don't see what's new, force a clean refresh by first clicking 
 
 # Things I need to fix: 
 
-Nothing at the moment, besides adding what's listed above!
+Toggleable Show Available Now button.
