@@ -305,6 +305,8 @@ function toggleAvail(){
 	var colN = table.getColumn("HoursN"),		
 		colNVis = colN.getVisibility();
 		console.log(colNVis)
+		table.removeFilter("AvailableN", "like", "Yes");
+		table.removeFilter("AvailableS", "like", "Yes");
 	//
 	if (colNVis) {
 		table.addFilter("AvailableN", "like", "Yes");
@@ -314,14 +316,18 @@ function toggleAvail(){
 	}
 };
 
-var elementsAll = [],
-	elementType = ["Fish", "Bugs", "Sea", "Fossils", "Art"],
-	elementTypeFilter = [],
+var elementType = ["Fish", "Bugs", "Sea", "Fossils", "Art"],
 	elementStatus = ["Caught", "Not caught", "Donated"],
-	elementStatusFilter = [];
-
-function setUserState(element, option) {
+	lastTypeOption,
+	lastStatusOption;
+	
+function setUserType(element, option) {
 		
+		
+	//TYPE FILTER BLOCK ("Fish", "Bugs", "Sea", "Fossils", "Art")
+	
+	table.removeFilter("Type", "like", lastTypeOption);
+	
 	if (option == 'all') {
 		document.getElementById('all').className = "btn btn-secondary";
 		document.getElementById('Fish').className = "btn btn-outline-primary";
@@ -329,57 +335,48 @@ function setUserState(element, option) {
 		document.getElementById('Sea').className = "btn btn-outline-warning";
 		document.getElementById('Fossils').className = "btn btn-outline-danger";
 		document.getElementById('Art').className = "btn btn-outline-dark";
-		table.removeFilter("Type", "in", (elementTypeFilter));
-		elementTypeFilter = [];
+		
 		
 	} else if (elementType.includes(option)) {
-		
-		//TYPE FILTER ("Fish", "Bugs", "Sea", "Fossils", "Art")
-		
 		document.getElementById('all').className = "btn btn-outline-secondary";
-
-		if (elementTypeFilter.includes(option)){
-			var indexOption = elementTypeFilter.indexOf(option);
-			elementTypeFilter.splice(indexOption, 1);
-			var typeClass = element.className.replace("btn btn-", "btn btn-outline-");
-			element.className = typeClass
-		} else {
-			elementTypeFilter.push(option);
-			var typeClass = element.className.replace("btn btn-outline-", "btn btn-");
-			element.className = typeClass
-		};
-		table.addFilter([{field:"Type", type:"in", value:elementTypeFilter}]);
+		document.getElementById('Fish').className = "btn btn-outline-primary";
+		document.getElementById('Bugs').className = "btn btn-outline-warning";
+		document.getElementById('Sea').className = "btn btn-outline-warning";
+		document.getElementById('Fossils').className = "btn btn-outline-danger";
+		document.getElementById('Art').className = "btn btn-outline-dark";
+		
+		var typeClass = element.className.replace("btn btn-outline-", "btn btn-");
+		element.className = typeClass;
+		table.addFilter("Type", "like", option)
+		lastTypeOption = option;
 	};
+		
+};
+
+function setUserStatus(element, option){
+
+
+	//STATUS FILTER BLOCK ("Caught", "Not caught", "Donated")
+
+	table.removeFilter("Status", "=", lastStatusOption);
 
 	if (option == "allStatus") {
 		document.getElementById('allStatus').className = "btn btn-secondary";
 		document.getElementById('Caught').className = "btn btn-outline-warning";
 		document.getElementById('Not caught').className = "btn btn-outline-info";
 		document.getElementById('Donated').className = "btn btn-outline-success";
-		table.removeFilter("Status", "in", elementStatusFilter);
-		elementStatusFilter = [];
-		
-	} else if (elementStatus.includes(option)){
-		
-		//STATUS FILTER ("Caught", "Not caught", "Donated")
-		
-		document.getElementById('allStatus').className = "btn btn-outline-secondary";
 
-		if (elementStatusFilter.includes(option)){
-			var indexOption = elementStatusFilter.indexOf(option);
-			elementStatusFilter.splice(indexOption, 1);
-			var StatusClass = element.className.replace("btn btn-", "btn btn-outline-");
-			element.className = StatusClass
-		} else {
-			elementStatusFilter.push(option);
-			var StatusClass = element.className.replace("btn btn-outline-", "btn btn-");
-			element.className = StatusClass
-		};
-		table.addFilter([{field:"Status", type:"in", value:elementStatusFilter}]);
+	} else if (elementStatus.includes(option)){
+		document.getElementById('allStatus').className = "btn btn-outline-secondary";
+		document.getElementById('Caught').className = "btn btn-outline-warning";
+		document.getElementById('Not caught').className = "btn btn-outline-info";
+		document.getElementById('Donated').className = "btn btn-outline-success";
 		
+		var typeClass = element.className.replace("btn btn-outline-", "btn btn-");
+		element.className = typeClass;
+		table.addFilter("Status", "=", option)
+		lastStatusOption = option;
+
 	};
-		//console.log(elementTypeFilter);
-		//console.log(elementStatusFilter);
-		//console.log(table.getFilters());
-		//SET FILTERS
 };
+

@@ -18,25 +18,32 @@
 		<script src="js/papaparse.min.js"></script>
 		<div style="width:90%; margin:auto">
 			<div style="height:5%"></div>
-			<div style="height:15%">
+			<div style="height:25%">
 				<button id="clearData" class="btn btn-success" onclick="removelocalStorage()">Clear localStorage</button>
 				<button id="hidePrice" class="btn btn-outline-success" onclick="togglePrice()">Toggle Price</button>
 				<button id="toggleHemi" class="btn btn-outline-success" onclick="toggleHemi()">Northern Hemisphere</button>
 				<button id="toggleAvail" class="btn btn-outline-success" onclick="toggleAvail()">Show Available Now</button>
+				</br>
+				</br>
 				<div class="btn-group">
-					<button type="button" id="all" class="btn btn-secondary" onclick="setUserState(this, 'all')">Show All</button>
-					<button type="button" id="Fish" class="btn btn-outline-primary" onclick="setUserState(this, 'Fish')"><img src="img/FishingRodIcon.png" width="30" height="30"> Fish</button>
-					<button type="button" id="Bugs" class="btn btn-outline-warning" onclick="setUserState(this, 'Bugs')"><img src="img/NetIcon.png" width="30" height="30"> Bugs</button>
-					<button type="button" id="Sea" class="btn btn-outline-warning" onclick="setUserState(this, 'Sea')"><img src="img/WetSuit.png" width="30" height="30"> Sea</button>
-					<button type="button" id="Fossils" class="btn btn-outline-danger" onclick="setUserState(this, 'Fossils')"><img src="img/AssessedFossil.png" width="30" height="30"> Fossils</button>
-					<button type="button" id="Art" class="btn btn-outline-dark" onclick="setUserState(this, 'Art')"><img src="img/FurnitureIcon.png" width="30" height="30"> Art</button>
+					<button type="button" id="all" class="btn btn-secondary" onclick="setUserType(this, 'all')">Show All</button>
+					<button type="button" id="Fish" class="btn btn-outline-primary" onclick="setUserType(this, 'Fish')"><img src="img/FishingRodIcon.png" width="30" height="30"> Fish</button>
+					<button type="button" id="Bugs" class="btn btn-outline-warning" onclick="setUserType(this, 'Bugs')"><img src="img/NetIcon.png" width="30" height="30"> Bugs</button>
+					<button type="button" id="Sea" class="btn btn-outline-warning" onclick="setUserType(this, 'Sea')"><img src="img/WetSuit.png" width="30" height="30"> Sea</button>
+					<button type="button" id="Fossils" class="btn btn-outline-danger" onclick="setUserType(this, 'Fossils')"><img src="img/AssessedFossil.png" width="30" height="30"> Fossils</button>
+					<button type="button" id="Art" class="btn btn-outline-dark" onclick="setUserType(this, 'Art')"><img src="img/FurnitureIcon.png" width="30" height="30"> Art</button>
+				</div>
+				</br>
+				</br>
+				<div id="location">
 				</div>
 				<div class="btn-group" id="status">
-					<button type="button" id="allStatus" class="btn btn-secondary" onclick="setUserState(this, 'allStatus')">Show All</button>
-					<button type="button" id="Not caught" class="btn btn-outline-info" onclick="setUserState(this, 'Not caught')">Not Caught</button>
-					<button type="button" id="Caught" class="btn btn-outline-warning" onclick="setUserState(this, 'Caught')">Caught</button>
-					<button type="button" id="Donated" class="btn btn-outline-success" onclick="setUserState(this, 'Donated')">Donated</button>
+					<button type="button" id="allStatus" class="btn btn-secondary" onclick="setUserStatus(this, 'allStatus')">Show All</button>
+					<button type="button" id="Not caught" class="btn btn-outline-info" onclick="setUserStatus(this, 'Not caught')">Not Caught</button>
+					<button type="button" id="Caught" class="btn btn-outline-warning" onclick="setUserStatus(this, 'Caught')">Caught</button>
+					<button type="button" id="Donated" class="btn btn-outline-success" onclick="setUserStatus(this, 'Donated')">Donated</button>
 				</div>
+				</br>
 				</br>
 				<div class="dropdown">
 				  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
@@ -58,7 +65,7 @@
 				</div>
 				-->
 			</div>
-			<div style="height:80%" id="fish-table"></div>
+			<div style="height:70%" id="fish-table"></div>
 		</div>
 		<script src="js/main.js"></script>
 	</body>
