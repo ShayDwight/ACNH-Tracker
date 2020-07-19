@@ -36,5 +36,3 @@ As always, if you don't see what's new, force a hard refresh by hitting Ctrl+F5 
 # Things I need to fix: 
 
 Toggleable Show Available Now button.
-
-Add a way to Save or Download whatever you have caught, so that we don't have to reset your progress each time.
