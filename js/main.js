@@ -258,6 +258,16 @@ function removelocalStorage() {
 	}
 }
 
+function removeTableData(){
+	var r = confirm("Are you sure you want to reset the Table Data? Use this if you're experiencing problems with Rows not displaying properly.");
+	if (r == true) {
+
+		localStorage.removeItem("tabulator-data");
+		location.reload();
+	}
+}
+
+
 function togglePrice(){
 	table.toggleColumn("Price");
 }
