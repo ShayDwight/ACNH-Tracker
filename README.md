@@ -24,6 +24,8 @@ Things I'm planning on adding:
 
 - *Changed* **Clear localStorage** button to **Reset Table Data** button! This button is useful for resetting the table data in case you encounter errors. The only drawback is it **WILL DELETE YOUR PROGRESS**. The next update should include a way to download what Critters you've caught or donated so that we don't have to destroy your save every time I update the raw file used to generate the table. The Raw file should not have to be updated again, unless some major re-classification happens in game, or a whole new slew of Critters are added/changed. 
 
+- Added **Download CSV** button so that you can download a simple CSV (Comma-separated values) File to your computer, so that you can see at a glance any Critters you've already Caught or Donated, their location, price, and hours. The only thing I haven't added yet to the CSV is the months that they are available.  
+
 - ~~Separated out Critter Filters and Caught (Status) Filters into their own functions. As such, you can now only select **ONE** Critter Type and Status Type instead of being able to select multiple Types at the same time. It should make further updates easier, as well as being able to code in Location Filters (River, Pond, Tree Stump, etc).~~
 
 - ~~Added **Show Available Now** button that *actually* works! It's not toggleable yet, but it works for both N and S Hemisphere! To reset it showing to ALL critters, Refresh the page!~~
