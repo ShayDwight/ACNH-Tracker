@@ -259,7 +259,7 @@ function removelocalStorage() {
 }
 
 function removeTableData(){
-	var r = confirm("Are you sure you want to reset the Table Data? Use this if you're experiencing problems with Rows not displaying properly.");
+	var r = confirm("Are you sure you want to reset the Table Data?\nUse this if you're experiencing problems with Rows not displaying properly.\n\nYou will lose all progress including which Critters you've marked as Donated or Caught!");
 	if (r == true) {
 
 		localStorage.removeItem("tabulator-data");
