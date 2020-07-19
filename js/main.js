@@ -156,7 +156,7 @@ var table = new Tabulator("#fish-table", {
 		{title:"Location", field:"Location"},
 		{title:"Price", field:"Price"},
 		{title:"Time", field:"Time",},
-		{title:"Availability (Northern Hemisphere)", field:"HoursN",
+		{title:"Availability (Northern Hemisphere)", field:"HoursN", download:false,
 			formatter:function(cell, formatterParams){
 				var cellValue = cell.getValue().split(","),
 					indexReturn = "",
@@ -195,7 +195,7 @@ var table = new Tabulator("#fish-table", {
 				return '<div class="boxer"><div class="box-row-hours">' + indexReturn + '</div></div><div class="boxer"><div class="box-row-month">' + indexMonthReturn + '</div></div>'
 			}
 		},
-		{title:"Availability (Southern Hemisphere)", field:"HoursS", visible:false,
+		{title:"Availability (Southern Hemisphere)", field:"HoursS", visible:false, download:false,
 			formatter:function(cell, formatterParams){
 				var cellValue = cell.getValue().split(","),
 					indexReturn = "",
@@ -410,8 +410,9 @@ function setLocationType(element, option){
 		table.addFilter("Location", "=", option);
 		document.getElementById(option).className = "dropdown-item active";
 		lastLocationOption = option;
-	}
-	
-	
-	
+	};
+}
+
+function downloadData(){
+	table.download("csv", "YAACNHT.csv");
 }
