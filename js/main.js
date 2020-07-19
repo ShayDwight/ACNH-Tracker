@@ -319,7 +319,8 @@ function toggleAvail(){
 var elementType = ["Fish", "Bugs", "Sea", "Fossils", "Art"],
 	elementStatus = ["Caught", "Not caught", "Donated"],
 	lastTypeOption,
-	lastStatusOption;
+	lastStatusOption,
+	lastLocationOption;
 	
 function setUserType(element, option) {
 		
@@ -330,7 +331,7 @@ function setUserType(element, option) {
 	
 	if (option == 'all') {
 		document.getElementById('all').className = "btn btn-secondary";
-		document.getElementById('Fish').className = "btn btn-outline-primary";
+		document.getElementById('Fish').className = "btn btn-outline-warning";
 		document.getElementById('Bugs').className = "btn btn-outline-warning";
 		document.getElementById('Sea').className = "btn btn-outline-warning";
 		document.getElementById('Fossils').className = "btn btn-outline-danger";
@@ -339,11 +340,17 @@ function setUserType(element, option) {
 		
 	} else if (elementType.includes(option)) {
 		document.getElementById('all').className = "btn btn-outline-secondary";
-		document.getElementById('Fish').className = "btn btn-outline-primary";
+		document.getElementById('Fish').className = "btn btn-outline-warning";
 		document.getElementById('Bugs').className = "btn btn-outline-warning";
 		document.getElementById('Sea').className = "btn btn-outline-warning";
 		document.getElementById('Fossils').className = "btn btn-outline-danger";
 		document.getElementById('Art').className = "btn btn-outline-dark";
+		
+		document.getElementById('location').innerHTML = "";
+		
+		if (option == "Fish"){
+			document.getElementById('location').innerHTML = "";
+		};
 		
 		var typeClass = element.className.replace("btn btn-outline-", "btn btn-");
 		element.className = typeClass;
@@ -374,9 +381,27 @@ function setUserStatus(element, option){
 		
 		var typeClass = element.className.replace("btn btn-outline-", "btn btn-");
 		element.className = typeClass;
-		table.addFilter("Status", "=", option)
+		table.addFilter("Status", "=", option);
 		lastStatusOption = option;
 
 	};
 };
 
+function setLocationType(element, option){
+	
+	if (lastLocationOption) {
+		table.removeFilter("Location", "=", lastLocationOption);
+		document.getElementById(lastLocationOption).className = "dropdown-item";
+	}
+	
+	if (option == "All"){
+		table.removeFilter("Location", "=", lastLocationOption);
+	} else {
+		table.addFilter("Location", "=", option);
+		document.getElementById(option).className = "dropdown-item active";
+		lastLocationOption = option;
+	}
+	
+	
+	
+}

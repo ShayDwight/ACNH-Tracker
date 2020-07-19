@@ -29,27 +29,93 @@
 			<div style="height:5%"></div>
 			<div style="height:25%">
 			
-			<div class="alert alert-success alert-dismissible">
+<!-- 			<div class="alert alert-success alert-dismissible">
 				<button type="button" class="close" data-dismiss="alert">&times;</button>
 				<h3>Can you do me a huge favor?</h3></br>
 				If you're currently running an ad-blocker or tracker-blocker, can you disable it while on this page?</br>
 				I promise you won't see any ads or anything. I'd just like to see how many visitors I have.</br>
 				Thanks! -Shay (You can close this box to bring back all the buttons!)</br>
 			</div>
-				<button id="clearData" class="btn btn-success" onclick="removelocalStorage()">Clear localStorage</button>
+ -->				<button id="clearData" class="btn btn-success" onclick="removelocalStorage()">Clear localStorage</button>
 				<button id="hidePrice" class="btn btn-outline-success" onclick="togglePrice()">Toggle Price</button>
 				<button id="toggleHemi" class="btn btn-outline-success" onclick="toggleHemi()">Northern Hemisphere</button>
 				<button id="toggleAvail" class="btn btn-outline-success" onclick="toggleAvail()">Show Available Now</button>
 				</br>
 				</br>
+				<button type="button" id="all" class="btn btn-secondary" onclick="setUserType(this, 'all')">Show All</button>
 				<div class="btn-group">
-					<button type="button" id="all" class="btn btn-secondary" onclick="setUserType(this, 'all')">Show All</button>
-					<button type="button" id="Fish" class="btn btn-outline-primary" onclick="setUserType(this, 'Fish')"><img src="img/FishingRodIcon.png" width="30" height="30"> Fish</button>
-					<button type="button" id="Bugs" class="btn btn-outline-warning" onclick="setUserType(this, 'Bugs')"><img src="img/NetIcon.png" width="30" height="30"> Bugs</button>
-					<button type="button" id="Sea" class="btn btn-outline-warning" onclick="setUserType(this, 'Sea')"><img src="img/WetSuit.png" width="30" height="30"> Sea</button>
-					<button type="button" id="Fossils" class="btn btn-outline-danger" onclick="setUserType(this, 'Fossils')"><img src="img/AssessedFossil.png" width="30" height="30"> Fossils</button>
-					<button type="button" id="Art" class="btn btn-outline-dark" onclick="setUserType(this, 'Art')"><img src="img/FurnitureIcon.png" width="30" height="30"> Art</button>
-				</div>
+					<button type="button" id="Fish" class="btn btn-outline-warning" onclick="setUserType(this, 'Fish')"><img src="img/FishingRodIcon.png" width="30" height="30"> Fish</button>
+					<button type="button" class="btn btn-outline-warning dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">
+					</button>
+					<div class="dropdown-menu">
+						<a class="dropdown-item" onclick="setLocationType(this, 'All')" href="#">All</a>
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" id="River" onclick="setLocationType(this, 'River')" href="#">River</a>
+						<a class="dropdown-item" id="River (Clifftop)" onclick="setLocationType(this, 'River (Clifftop)')" href="#">River (Clifftop)</a>
+						<a class="dropdown-item" id="River (Mouth)" onclick="setLocationType(this, 'River (Mouth)')" href="#">River (Mouth)</a>
+						<a class="dropdown-item" id="Pond" onclick="setLocationType(this, 'Pond')" href="#">Pond</a>
+						<a class="dropdown-item" id="Pond (Clifftop)" onclick="setLocationType(this, 'Pond (Clifftop)')" href="#">Pond (Clifftop)</a>
+						<a class="dropdown-item" id="Pier" onclick="setLocationType(this, 'Pier')" href="#">Pier</a>
+						<a class="dropdown-item" id="Sea" onclick="setLocationType(this, 'Sea')" href="#">Sea</a>
+						<a class="dropdown-item" id="Sea (Raining)" onclick="setLocationType(this, 'Sea (Raining)')" href="#">Sea (Raining)</a>
+					</div>
+				</div>	
+				
+				<div class="btn-group">
+					<button type="button" id="Bugs" class="btn btn-outline-warning" onclick="setUserType(this, 'Bugs')" href="#"><img src="img/NetIcon.png" width="30" height="30"> Bugs</button>
+					<button type="button" class="btn btn-outline-warning dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">
+					</button>
+					<div class="dropdown-menu">
+						<a class="dropdown-item" id="All" onclick="setLocationType(this, 'All')" href="#">All</a>
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" id="Beach" onclick="setLocationType(this, 'Beach')" href="#">Beach</a>
+						<a class="dropdown-item" id="Beach Rocks" onclick="setLocationType(this, 'Beach Rocks')" href="#">Beach Rocks</a>
+						<a class="dropdown-item" id="Flowers" onclick="setLocationType(this, 'Flowers')" href="#">Flowers</a>
+						<a class="dropdown-item" id="Flowers (Hybrid)" onclick="setLocationType(this, 'Flowers (Hybrid)')" href="#">Flowers (Hybrid)</a>
+						<a class="dropdown-item" id="Flowers (White)" onclick="setLocationType(this, 'Flowers (White)')" href="#">Flowers (White)</a>
+						<a class="dropdown-item" id="Flying" onclick="setLocationType(this, 'Flying')" href="#">Flying</a>
+						<a class="dropdown-item" id="Flying (Lights)" onclick="setLocationType(this, 'Flying (Lights)')" href="#">Flying (Lights)</a>
+						<a class="dropdown-item" id="Ground" onclick="setLocationType(this, 'Ground')" href="#">Ground</a>
+						<a class="dropdown-item" id="Trees" onclick="setLocationType(this, 'Trees')" href="#">Trees</a>
+						<a class="dropdown-item" id="Trees (Coconut)" onclick="setLocationType(this, 'Trees (Coconut)')" href="#">Trees (Coconut)</a>
+						<a class="dropdown-item" id="Trees (Shaken)" onclick="setLocationType(this, 'Trees (Shaken)')" href="#">Trees (Shaken)</a>
+						<a class="dropdown-item" id="Near Trees" onclick="setLocationType(this, 'Near Trees')" href="#">Near Trees</a>
+						<a class="dropdown-item" id="Tree Stumps" onclick="setLocationType(this, 'Tree Stumps')" href="#">Tree Stumps</a>
+						<a class="dropdown-item" id="Rocks (Hit)" onclick="setLocationType(this, 'Rocks (Hit)')" href="#">Rocks (Hit)</a>
+						<a class="dropdown-item" id="Rocks (Rain)" onclick="setLocationType(this, 'Rocks (Rain)')" href="#">Rocks (Rain)</a>
+						<a class="dropdown-item" id="Rotten Food" onclick="setLocationType(this, 'Rotten Food')" href="#">Rotten Food</a>
+						<a class="dropdown-item" id="Trash Items" onclick="setLocationType(this, 'Trash Items')" href="#">Trash Items</a>
+						<a class="dropdown-item" id="Snowballs" onclick="setLocationType(this, 'Snowballs')" href="#">Snowballs</a>
+						<a class="dropdown-item" id="Underground" onclick="setLocationType(this, 'Underground')" href="#">Underground</a>
+						<a class="dropdown-item" id="Villagers" onclick="setLocationType(this, 'Villagers')" href="#">Villagers</a>
+						<a class="dropdown-item" id="Water" onclick="setLocationType(this, 'Water')" href="#">Water</a>
+
+					</div>
+					
+				</div>	
+				
+				<div class="btn-group">
+					<button type="button" id="Sea" class="btn btn-outline-warning" onclick="setUserType(this, 'Sea')" href="#"><img src="img/WetSuit.png" width="30" height="30"> Sea</button>
+					<button type="button" class="btn btn-outline-warning dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">
+					</button>
+					<div class="dropdown-menu">
+						<a class="dropdown-item" id="All" onclick="setLocationType(this, 'All')" href="#">All</a>
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" id="Stationary" onclick="setLocationType(this, 'Stationary')" href="#">Stationary</a>
+						<a class="dropdown-item" id="Very Slow" onclick="setLocationType(this, 'Very Slow')" href="#">Very Slow</a>
+						<a class="dropdown-item" id="Slow" onclick="setLocationType(this, 'Slow')" href="#">Slow</a>
+						<a class="dropdown-item" id="Medium" onclick="setLocationType(this, 'Medium')" href="#">Medium</a>
+						<a class="dropdown-item" id="Fast" onclick="setLocationType(this, 'Fast')" href="#">Fast</a>
+						<a class="dropdown-item" id="Very Fast" onclick="setLocationType(this, 'Very Fast')" href="#">Very Fast</a>
+						
+					</div>
+					
+				</div>	
+				
+				<button type="button" id="Fossils" class="btn btn-outline-danger" onclick="setUserType(this, 'Fossils')"><img src="img/AssessedFossil.png" width="30" height="30"> Fossils</button>
+				<button type="button" id="Art" class="btn btn-outline-dark" onclick="setUserType(this, 'Art')"><img src="img/FurnitureIcon.png" width="30" height="30"> Art</button>
+	
+				
 				</br>
 				</br>
 				<div id="location">
@@ -67,18 +133,18 @@
 					Dropdown button
 				  </button>
 				  <div class="dropdown-menu">
-					<a class="dropdown-item" href="#">Link 1</a>
-					<a class="dropdown-item" href="#">Link 2</a>
-					<a class="dropdown-item" href="#">Link 3</a>
+					<a class="dropdown-item" onclick="setLocationType(this, 'Bugs')">Link 1</a>
+					<a class="dropdown-item" onclick="setLocationType(this, 'Bugs')">Link 2</a>
+					<a class="dropdown-item" onclick="setLocationType(this, 'Bugs')">Link 3</a>
 				  </div>
 				</div>
-				<!-- 
+				<!--
 				<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
 					Sony
 				</button>
 				<div class="dropdown-menu">
-					<a class="dropdown-item" href="#">Tablet</a>
-					<a class="dropdown-item" href="#">Smartphone</a>
+					<a class="dropdown-item" onclick="setLocationType(this, 'Bugs')">Tablet</a>
+					<a class="dropdown-item" onclick="setLocationType(this, 'Bugs')">Smartphone</a>
 				</div>
 				-->
 			</div>
