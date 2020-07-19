@@ -112,7 +112,7 @@ var table = new Tabulator("#fish-table", {
 			}
 		}
 		},
-		{title:"Icon", field:"IconFilenameN", formatter:function(cell, formatterParams){
+		{title:"Icon", field:"IconFilenameN", download:false, formatter:function(cell, formatterParams){
 			var cellValue = cell.getValue(),
 				cellClass,
 				cellCheckCross,
@@ -130,7 +130,7 @@ var table = new Tabulator("#fish-table", {
 			};
 			return '<div id="' + cellValue + '" class="' + cellClass + '"><img width="50" height="50" src="https://acnhcdn.com/latest/MenuIcon/' + cellValue + '.png"></br><div class="' + cellCheckCross + '" style="text-align: center; width:100%"></div></div>'
 		}},
-		{title:"Icon", field:"IconFilenameS", visible:false, formatter:function(cell, formatterParams){
+		{title:"Icon", field:"IconFilenameS", download:false, visible:false, formatter:function(cell, formatterParams){
 			var cellValue = cell.getValue(),
 				cellClass,
 				cellCheckCross,
@@ -239,8 +239,8 @@ var table = new Tabulator("#fish-table", {
 
 		{title:"Available Now N", field:"AvailableN", mutator:customMutatorN, visible:false},
 		{title:"Available Now S", field:"AvailableS", mutator:customMutatorS, visible:false},
-		{title:"Date Of Birth", field:"dob"},
-		{title:"Cheese Preference", field:"cheese"},
+		{title:"Date Of Birth", field:"dob", download:false},
+		{title:"Cheese Preference", field:"cheese",  download:false},
 	],
 	dataEdited:function(data){
 		//JSON encode data and store in local storage.
