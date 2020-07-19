@@ -239,8 +239,6 @@ var table = new Tabulator("#fish-table", {
 
 		{title:"Available Now N", field:"AvailableN", mutator:customMutatorN, visible:false},
 		{title:"Available Now S", field:"AvailableS", mutator:customMutatorS, visible:false},
-		{title:"Date Of Birth", field:"dob", download:false},
-		{title:"Cheese Preference", field:"cheese",  download:false},
 	],
 	dataEdited:function(data){
 		//JSON encode data and store in local storage.
