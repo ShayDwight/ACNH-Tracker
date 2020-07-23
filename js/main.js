@@ -257,7 +257,7 @@ function removelocalStorage() {
 }
 
 function removeTableData(){
-	var r = confirm("Are you sure you want to reset the Table Data?\nUse this if you're experiencing problems with Rows not displaying properly.\n\nYou will lose all progress including which Critters you've marked as Donated or Caught!");
+	var r = confirm("Are you sure you want to reset the Table Data?\nUse this if you're experiencing problems with Rows not displaying properly.\n\nYou will lose all progress including which Critters you've marked as Donated or Caught!\n\nClick Download CSV to download a copy of all your Caught or Donated Critters so that you can quickly mark them off again!");
 	if (r == true) {
 
 		localStorage.removeItem("tabulator-data");
@@ -324,7 +324,7 @@ function toggleAvail(){
 	}
 };
 
-var elementType = ["Fish", "Bugs", "Sea", "Fossils", "Art"],
+var elementType = ["Fish", "Bugs", "Underwater", "Fossils", "Art"],
 	elementStatus = ["Caught", "Not caught", "Donated"],
 	lastTypeOption,
 	lastStatusOption,
@@ -333,32 +333,28 @@ var elementType = ["Fish", "Bugs", "Sea", "Fossils", "Art"],
 function setUserType(element, option) {
 		
 		
-	//TYPE FILTER BLOCK ("Fish", "Bugs", "Sea", "Fossils", "Art")
+	//TYPE FILTER BLOCK ("Fish", "Bugs", "Underwater", "Fossils", "Art")
 	
 	table.removeFilter("Type", "like", lastTypeOption);
 	
 	if (option == 'all') {
 		document.getElementById('all').className = "btn btn-secondary";
-		document.getElementById('Fish').className = "btn btn-outline-warning";
-		document.getElementById('Bugs').className = "btn btn-outline-warning";
-		document.getElementById('Sea').className = "btn btn-outline-warning";
+		document.getElementById('Fish').className = "btn btn-outline-primary";
+		document.getElementById('Bugs').className = "btn btn-outline-primary";
+		document.getElementById('Underwater').className = "btn btn-outline-primary";
 		document.getElementById('Fossils').className = "btn btn-outline-danger";
 		document.getElementById('Art').className = "btn btn-outline-dark";
 		
 		
 	} else if (elementType.includes(option)) {
 		document.getElementById('all').className = "btn btn-outline-secondary";
-		document.getElementById('Fish').className = "btn btn-outline-warning";
-		document.getElementById('Bugs').className = "btn btn-outline-warning";
-		document.getElementById('Sea').className = "btn btn-outline-warning";
+		document.getElementById('Fish').className = "btn btn-outline-primary";
+		document.getElementById('Bugs').className = "btn btn-outline-primary";
+		document.getElementById('Underwater').className = "btn btn-outline-primary";
 		document.getElementById('Fossils').className = "btn btn-outline-danger";
 		document.getElementById('Art').className = "btn btn-outline-dark";
 		
 		document.getElementById('location').innerHTML = "";
-		
-		if (option == "Fish"){
-			document.getElementById('location').innerHTML = "";
-		};
 		
 		var typeClass = element.className.replace("btn btn-outline-", "btn btn-");
 		element.className = typeClass;
@@ -414,3 +410,4 @@ function setLocationType(element, option){
 function downloadData(){
 	table.download("csv", "YAACNHT.csv");
 }
+s
