@@ -257,7 +257,7 @@ function removelocalStorage() {
 }
 
 function removeTableData(){
-	var r = confirm("Are you sure you want to reset the Table Data?\nUse this if you're experiencing problems with Rows not displaying properly.\n\nYou will lose all progress including which Critters you've marked as Donated or Caught!");
+	var r = confirm("Are you sure you want to reset the Table Data?\nUse this if you're experiencing problems with Rows not displaying properly.\n\nYou will lose all progress including which Critters you've marked as Donated or Caught!\n\nClick Download CSV to download a copy of all your Caught or Donated Critters so that you can quickly mark them off again!");
 	if (r == true) {
 
 		localStorage.removeItem("tabulator-data");
@@ -339,18 +339,18 @@ function setUserType(element, option) {
 	
 	if (option == 'all') {
 		document.getElementById('all').className = "btn btn-secondary";
-		document.getElementById('Fish').className = "btn btn-outline-warning";
-		document.getElementById('Bugs').className = "btn btn-outline-warning";
-		document.getElementById('Sea').className = "btn btn-outline-warning";
+		document.getElementById('Fish').className = "btn btn-outline-primary";
+		document.getElementById('Bugs').className = "btn btn-outline-primary";
+		document.getElementById('Sea').className = "btn btn-outline-primary";
 		document.getElementById('Fossils').className = "btn btn-outline-danger";
 		document.getElementById('Art').className = "btn btn-outline-dark";
 		
 		
 	} else if (elementType.includes(option)) {
 		document.getElementById('all').className = "btn btn-outline-secondary";
-		document.getElementById('Fish').className = "btn btn-outline-warning";
-		document.getElementById('Bugs').className = "btn btn-outline-warning";
-		document.getElementById('Sea').className = "btn btn-outline-warning";
+		document.getElementById('Fish').className = "btn btn-outline-primary";
+		document.getElementById('Bugs').className = "btn btn-outline-primary";
+		document.getElementById('Sea').className = "btn btn-outline-primary";
 		document.getElementById('Fossils').className = "btn btn-outline-danger";
 		document.getElementById('Art').className = "btn btn-outline-dark";
 		
@@ -414,3 +414,4 @@ function setLocationType(element, option){
 function downloadData(){
 	table.download("csv", "YAACNHT.csv");
 }
+s
