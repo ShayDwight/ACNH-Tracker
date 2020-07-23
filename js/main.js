@@ -409,4 +409,3 @@ function setLocationType(element, option){
 function downloadData(){
 	table.download("csv", "YAACNHT.csv");
 }
-s
