@@ -354,7 +354,6 @@ function setUserType(element, option) {
 		document.getElementById('Fossils').className = "btn btn-outline-danger";
 		document.getElementById('Art').className = "btn btn-outline-dark";
 		
-		document.getElementById('location').innerHTML = "";
 		
 		var typeClass = element.className.replace("btn btn-outline-", "btn btn-");
 		element.className = typeClass;
