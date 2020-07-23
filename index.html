@@ -19,6 +19,7 @@
 		<!-- Latest compiled and minified CSS -->
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 		<script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.6.3/dist/js/tabulator.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -27,27 +28,21 @@
 		<script src="js/papaparse.min.js"></script>
 		<div style="width:90%; margin:auto">
 			<div style="height:5%"></div>
-			<div style="height:25%">
+			<div id="buttondiv">
 			
-			<div class="alert alert-success alert-dismissible">
-				<button type="button" class="close" data-dismiss="alert">&times;</button>
-				<h3>Can you do me a huge favor?</h3></br>
-				If you're currently running an ad-blocker or tracker-blocker, can you disable it while on this page?</br>
-				I promise you won't see any ads or anything. I'd just like to see how many visitors I have.</br>
-				Thanks! -Shay (You can close this box to bring back all the buttons!)</br>
-			</div>
-				
-				<button id="clearData" class="btn btn-success" onclick="removeTableData()">Reset Table Data</button>
-				<button id="clearData" class="btn btn-success" onclick="downloadData()">Download CSV</button>
-				<button id="hidePrice" class="btn btn-outline-success" onclick="togglePrice()">Toggle Price</button>
-				<button id="toggleHemi" class="btn btn-outline-success" onclick="toggleHemi()">Northern Hemisphere</button>
-				<button id="toggleAvail" class="btn btn-outline-success" onclick="toggleAvail()">Show Available Now</button>
-				</br>
-				</br>
+				<div class="alert alert-success alert-dismissible">
+					<button type="button" class="close" data-dismiss="alert">&times;</button>
+					<h3>Can you do me a huge favor?</h3></br>
+					If you're currently running an ad-blocker or tracker-blocker, can you disable it while on this page?</br>
+					I promise you won't see any ads or anything. I'd just like to see how many visitors I have.</br>
+					Thanks! -Shay (You can close this box to bring back all the buttons!)</br>
+				</div>
+					
 				<button type="button" id="all" class="btn btn-secondary" onclick="setUserType(this, 'all')">Show All</button>
+				
 				<div class="btn-group">
-					<button type="button" id="Fish" class="btn btn-outline-warning" onclick="setUserType(this, 'Fish')"><img src="img/FishingRodIcon.png" width="30" height="30"> Fish</button>
-					<button type="button" class="btn btn-outline-warning dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">
+					<button type="button" id="Fish" class="btn btn-outline-primary" onclick="setUserType(this, 'Fish')"><img src="img/FishingRodIcon.png" width="30" height="30"> Fish</button>
+					<button type="button" class="btn btn-outline-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">
 					</button>
 					<div class="dropdown-menu">
 						<a class="dropdown-item" onclick="setLocationType(this, 'All')" href="#">All</a>
@@ -62,10 +57,10 @@
 						<a class="dropdown-item" id="Sea (Raining)" onclick="setLocationType(this, 'Sea (Raining)')" href="#">Sea (Raining)</a>
 					</div>
 				</div>	
-				
+					
 				<div class="btn-group">
-					<button type="button" id="Bugs" class="btn btn-outline-warning" onclick="setUserType(this, 'Bugs')" href="#"><img src="img/NetIcon.png" width="30" height="30"> Bugs</button>
-					<button type="button" class="btn btn-outline-warning dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">
+					<button type="button" id="Bugs" class="btn btn-outline-primary" onclick="setUserType(this, 'Bugs')" href="#"><img src="img/NetIcon.png" width="30" height="30"> Bugs</button>
+					<button type="button" class="btn btn-outline-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">
 					</button>
 					<div class="dropdown-menu">
 						<a class="dropdown-item" id="All" onclick="setLocationType(this, 'All')" href="#">All</a>
@@ -91,14 +86,12 @@
 						<a class="dropdown-item" id="Underground" onclick="setLocationType(this, 'Underground')" href="#">Underground</a>
 						<a class="dropdown-item" id="Villagers" onclick="setLocationType(this, 'Villagers')" href="#">Villagers</a>
 						<a class="dropdown-item" id="Water" onclick="setLocationType(this, 'Water')" href="#">Water</a>
-
 					</div>
-					
 				</div>	
-				
+					
 				<div class="btn-group">
-					<button type="button" id="Sea" class="btn btn-outline-warning" onclick="setUserType(this, 'Sea')" href="#"><img src="img/WetSuit.png" width="30" height="30"> Sea</button>
-					<button type="button" class="btn btn-outline-warning dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">
+					<button type="button" id="Underwater" class="btn btn-outline-primary" onclick="setUserType(this, 'Underwater')" href="#"><img src="img/WetSuit.png" width="30" height="30"> Underwater</button>
+					<button type="button" class="btn btn-outline-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">
 					</button>
 					<div class="dropdown-menu">
 						<a class="dropdown-item" id="All" onclick="setLocationType(this, 'All')" href="#">All</a>
@@ -109,29 +102,33 @@
 						<a class="dropdown-item" id="Medium" onclick="setLocationType(this, 'Medium')" href="#">Medium</a>
 						<a class="dropdown-item" id="Fast" onclick="setLocationType(this, 'Fast')" href="#">Fast</a>
 						<a class="dropdown-item" id="Very Fast" onclick="setLocationType(this, 'Very Fast')" href="#">Very Fast</a>
-						
 					</div>
-					
 				</div>	
 				
 				<button type="button" id="Fossils" class="btn btn-outline-danger" onclick="setUserType(this, 'Fossils')"><img src="img/AssessedFossil.png" width="30" height="30"> Fossils</button>
 				<button type="button" id="Art" class="btn btn-outline-dark" onclick="setUserType(this, 'Art')"><img src="img/FurnitureIcon.png" width="30" height="30"> Art</button>
+				<button type="button" id="ToggleButtons" class="btn btn-outline-secondary" data-toggle="collapse" data-target="#settings"><i class="material-icons">add_circle_outline</i></button>
 	
 				
 				</br>
 				</br>
-				<div id="location">
+				<div id="settings" class="collapse">
+					<div class="btn-group" id="status">
+						<button type="button" id="allStatus" class="btn btn-secondary" onclick="setUserStatus(this, 'allStatus')">Show All</button>
+						<button type="button" id="Not caught" class="btn btn-outline-info" onclick="setUserStatus(this, 'Not caught')">Not Caught</button>
+						<button type="button" id="Caught" class="btn btn-outline-warning" onclick="setUserStatus(this, 'Caught')">Caught</button>
+						<button type="button" id="Donated" class="btn btn-outline-success" onclick="setUserStatus(this, 'Donated')">Donated</button>
+					</div>
+					</br>
+					</br>
+					<button id="clearData" class="btn btn-success" onclick="removeTableData()">Reset Table Data</button>
+					<button id="clearData" class="btn btn-success" onclick="downloadData()">Download CSV</button>
+					<button id="hidePrice" class="btn btn-outline-success" onclick="togglePrice()">Toggle Price</button>
+					<button id="toggleHemi" class="btn btn-outline-success" onclick="toggleHemi()">Northern Hemisphere</button>
+					<button id="toggleAvail" class="btn btn-outline-success" onclick="toggleAvail()">Show Available Now</button>
 				</div>
-				<div class="btn-group" id="status">
-					<button type="button" id="allStatus" class="btn btn-secondary" onclick="setUserStatus(this, 'allStatus')">Show All</button>
-					<button type="button" id="Not caught" class="btn btn-outline-info" onclick="setUserStatus(this, 'Not caught')">Not Caught</button>
-					<button type="button" id="Caught" class="btn btn-outline-warning" onclick="setUserStatus(this, 'Caught')">Caught</button>
-					<button type="button" id="Donated" class="btn btn-outline-success" onclick="setUserStatus(this, 'Donated')">Donated</button>
-				</div>
-				</br>
-				</br>
 			</div>
-			<div style="height:70%" id="fish-table"></div>
+			<div id="fish-table"></div>
 		</div>
 		<script src="js/main.js"></script>
 	</body>
