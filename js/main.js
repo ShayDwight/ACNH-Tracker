@@ -5,10 +5,46 @@ var currDate = new Date(),
 
 
 function doStuff(data){
+	console.log(data.length);
+	//table.setData(data);
+	for (i = 0; i < data.length; i++) {
 
-	//console.log(data.length);
-	table.setData(data);
+		//console.log(data[i].Name);
+		console.log(data[i]);
+		var critterName = '"' + data[i].Name + '"',
+			critterType = '"' + data[i].Type + '"',
+			critterTime = '"' + data[i].Time + '"',
+			critterHoursN = '"' + data[i].HoursN + '"',
+			critterMonthsN = '"' + data[i].MonthsN + '"',
+			critterMonthsS = '"' + data[i].MonthsS + '"',
+			critterIconFilenameN = '"' + data[i].IconFilenameN + '"',
+			critterLocation = '"' + data[i].Location + '"';
+		var critter = critterName + ', ' + critterType + ', ' + critterTime + ', ' + critterHoursN + ', ' + critterMonthsN + ', ' + critterMonthsS + ', ' + critterIconFilenameN + ', ' + critterLocation;
+		document.getElementById("grid").innerHTML += "<div id='" + data[i].IconFilenameN + "' style='float: left; border: 1px solid; width: 150px; height: 150px; text-align: center; margin: auto;' onclick='openNav(this, " + critter + ")'><img src='https://acnhcdn.com/latest/MenuIcon/" + data[i].IconFilenameN + ".png' style='max-width: 50%;'></br> " + data[i].Name + "</div>"
+	}
 };
+
+/*
+<span class='tooltiptext'>This is a test of the tooltip.</span>
+
+AvailableN: "No"
+AvailableS: "Yes"
+HoursN: "1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1"
+HoursS: "1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1"
+IconFilenameN: "Fish0"
+IconFilenameS: "Fish0"
+Location: "River"
+MonthsN: "1,1,1,0,0,0,0,0,0,0,1,1"
+MonthsS: "0,0,0,0,1,1,1,1,1,0,0,0"
+-Name: "Bitterling"
+Price: "900"
+Row: "1"
+Status: "Not caught"
+Time: "All day"
+-Type: "Fish"
+id: "1"
+*/
+
 
 function parseData (url, callBack){
 	Papa.parse (url, {
@@ -38,7 +74,7 @@ $(document).ready(function() {
 	for (i = 0; i < localStorage.length; i++){
 		var localStorageKeyName = localStorage.key(i),
 			localStorageKeyValue = localStorage.getItem(localStorageKeyName);
-		console.log(localStorage.key(i) + ": " + localStorage.getItem(localStorageKeyName));
+		//console.log(localStorage.key(i) + ": " + localStorage.getItem(localStorageKeyName));
 		//Check Hemisphere
 		//console.log("localStorageKeyValue: " + localStorageKeyValue);
 		if (localStorageKeyName.includes("hemisphere")) {
@@ -408,4 +444,33 @@ function setLocationType(element, option){
 
 function downloadData(){
 	table.download("csv", "YAACNHT.csv");
+}
+
+function openNav(id, name, type, time, hoursN, monthsN, monthsS, iconFileNameN, location) {
+	document.getElementById("mySidenav").style.width = "350px";
+	//document.getElementById("main").style.marginRight = "350px";
+	console.log(id);
+	console.log(name);
+	console.log(type);
+	console.log(time);
+	console.log(hoursN);
+	console.log(monthsN);
+	console.log(iconFileNameN);
+	
+	document.getElementById("crittericon").src = 'https://acnhcdn.com/latest/MenuIcon/' + iconFileNameN + '.png';
+	document.getElementById("crittername").innerHTML = name;
+	document.getElementById("crittertime").innerHTML = time;
+	document.getElementById("critterhoursN").innerHTML = hoursN;
+	document.getElementById("crittermonthsN").innerHTML = monthsN;
+
+
+	//document.getElementById("fishname").innerHTML = data;
+	console.log(id);
+	//console.log(data);
+}
+
+/* Set the width of the side navigation to 0 and the left margin of the page content to 0 */
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+  //document.getElementById("main").style.text-align = "center";
 }

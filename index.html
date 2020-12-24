@@ -26,8 +26,14 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 		<script src="js/papaparse.min.js"></script>
-		<div style="width:90%; margin:auto">
+		<div id= "main" style="width:70%; margin:auto">
 			<div style="height:5%"></div>
+			<div class="topnav">
+				<a class="active" href="#home">Home</a>
+				<a href="#about">About</a>
+				<a href="#contact">Contact</a>
+				<input type="text" placeholder="Search..">
+			</div>
 			<div id="buttondiv">
 			
 				<div class="alert alert-success alert-dismissible">
@@ -128,7 +134,17 @@
 					<button id="toggleAvail" class="btn btn-outline-success" onclick="toggleAvail()">Show Available Now</button>
 				</div>
 			</div>
-			<div id="fish-table"></div>
+			<!-- <div id="fish-table"></div> -->
+			<div id="grid"></div>
+			<div id="mySidenav" class="sidenav">
+				<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+				<img id="crittericon" src="">
+				<div id="crittername"></div>
+				<div id="crittertime"></div>
+				<div id="critterhoursN"></div>
+				<div id="crittermonthsN"></div>
+				<div id="critterlocation"></div>
+			</div>
 		</div>
 		<script src="js/main.js"></script>
 	</body>
